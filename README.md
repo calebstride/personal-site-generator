@@ -1,2 +1,2 @@
-# personal-site
-The code for my personal website
+# **Personal Website**
+The code for my personal website.
