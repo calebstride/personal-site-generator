@@ -1,0 +1,43 @@
+html, body {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    height: auto;
+    min-height: 100%;
+}
+
+#sideBar ul {
+    margin: 0px;
+}
+
+#sideBar ul li {
+    cursor: pointer;
+}
+
+#sideBar {
+    background-color: red;
+    width: 180px;
+    height: 100%;
+    margin: 0px;
+    float: left;
+    display: block;
+    position: fixed;
+    z-index: 1000;
+}
+
+#pageContent {
+    height: 100%;
+    background-color: blue;
+    padding-left: 180px;
+}
+
+#pageTitle {
+    height: 80px;
+    background-color: yellow;
+}
+
+#dynamicContent {
+    height: auto;
+    background-color: green;
+}
