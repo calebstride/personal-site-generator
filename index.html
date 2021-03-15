@@ -19,16 +19,14 @@
 
 
     <!--  
-
-        Keep a list of the files in that directory. {about: ["/about"], projects: ["/proj/minecraft", "/proj/poo"]} 
-
-        The nav has the top levels defined (about,projects,contact). 
         
-        When you click on one of the top levels call function to create a tab for each page defined from the above list. (can do this before user clicks on section).
+        Define the page name within an attribute on the page in the nav bar
 
         Then when the user clicks on the specific page get that html content for the page via ajax and put it in the content
 
         When the user clicks on a different page then remove the content and replace it with the new page's content
+
+        Add current page and/or location in localstorage
     -->
 
 <body>
@@ -36,153 +34,34 @@
     
 
         <nav id="sideBar">
-            <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Projects</li>
-                <li>Contact</li>
+            <ul id="mainNavBar">
+                <li class="canToggle"><div>Home</div></li>
+                <li class="canToggle"><div>About</div></li>
+                <li> 
+                    <div>Projects</div>
+                    <ul class="dropDownContent" id="projectsDropDown">
+                        <li class="dropDownItem"><div>Example One</div></li>
+                        <li class="dropDownItem"><div>Example Two</div></li>
+                    </ul>
+                </li>
+                <li class="canToggle"><div>Contact</div></li>
             </ul>
         </nav>
 
 
+        <div id="b_menu" onclick="ContentCreator.expandMenu('main_nav')">
+            <div class="b_men"></div>
+            <div class="b_men"></div>
+            <div class="b_men"></div>
+        </div>
+
+
+        <div id="sideBarPush">
+        </div>
+
         <div id="pageContent">
-            <div id="pageTitle">
-                TItel
-            </div>
-
             <div id="dynamicContent">
-                AAA
-
-
-
-
-
-
-
-
-
-
-                a
-
-
-
-
-
-
-
-
-                a
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                a
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                a 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                a 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                a
-                 
-
-
-
-
-
-
-
-
-
-                <br>
-
-                <br>
-                <br>
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+                
 
             </div>
         </div>
