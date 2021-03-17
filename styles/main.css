@@ -12,24 +12,11 @@ html, body {
 
 #sideBar {
     background-color: #808080;
-    height: 100%;
     margin: 0px;
-    float: left;
-    display: block;
-    position: fixed;
     z-index: 1000;
 }
 
-#sideBar, #sideBarPush {
-    width: 180px;
-}
-
-#sideBarPush {
-    height: 180px;
-    float: left;
-}
-
-#sideBar #mainNavBar {
+#sideBar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -51,18 +38,29 @@ html, body {
     background-color: green;
 }
 
-#b_menu {
+.hiddenFeature {
     display: none;
 }
 
 @media screen and (max-width: 600px) {
+    #closeContainer {
+        right: 0;
+        position: absolute;
+        padding-right: 10px;
+        font-size: 50px;
+        color: #333333;
+        display: inline-block;
+        line-height: 25px;
+    }
+    
     #b_menu {
-        margin-right: 100%;
-        margin-left: 4px;
-        margin-top: 8px;
-        margin-bottom: 8px;
+        padding-right: 10px;
+        padding-left: 100%;
+        padding-top: 8px;
+        padding-bottom: 8px;
         display: block;
-        width: fit-content;
+        float: right;
+        z-index: 101;
     }
       
     .b_men {
@@ -72,7 +70,22 @@ html, body {
         margin: 6px 0;
     }
 
-    #sideBar, #sideBarPush {
+    #burgerHug {
+        background-color: #808080;
+        overflow: auto;
+    }
+
+    #sideBar {
+        width: 60%;
+        position: fixed;
+        right: 0;
+        top: 0;
+        padding-top: 20px;
+        border-left: 2px solid black;
+        border-bottom: 2px solid black;
+    }
+
+    #sideBarPush, .hiddenFeatureMob {
         display: none;
     }
 
@@ -83,9 +96,28 @@ html, body {
 
 @media screen and (min-width: 600px) {
 
+    #sideBar {
+        height: 100%;
+        display: block;
+        position: fixed;
+    }
+
+    #sideBar, #sideBarPush {
+        width: 180px;
+    }
+    
+    #sideBarPush {
+        height: 180px;
+        float: left;
+    }
+
     #pageContent {
         height: fit-content;
         overflow: hidden;
+    }
+
+    #b_menu, #closeContainer, .hiddenFeatureBig {
+        display: none;
     }
 
 }

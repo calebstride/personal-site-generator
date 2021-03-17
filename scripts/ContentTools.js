@@ -1,21 +1,21 @@
 class ContentTools {
 
-    // Expand the navigation menu
-	static expandMenu(id_menu) {
-		var x = document.getElementById(id_menu);
-		if (x.className === "dropdown-content") {
-			x.className += "_responsive";
-		}
-		else if (x.className === "m_drop") {
-			x.className += "_responsive";
-		}
-		else if (x.className === "m_drop_responsive") {
-			x.className = "m_drop";
-		}
-		else {
-			x.className = "dropdown-content";
-		}
-	};
+    // Send a get request to the html page needed
+	static getPage(send_location) {
+	    var xhttp = new XMLHttpRequest();
+
+	    // Decide what to do when the state changes
+	    xhttp.onreadystatechange = function() {
+	        // If response ready and http request OK
+	        if (this.readyState === 4 && this.status === 200) {
+	            document.getElementById("dynamicContent").innerHTML = this.responseText;
+	        }
+	    };  
+
+	    // Decide whether to post or get the values
+		xhttp.open("GET", send_location, true);
+		xhttp.send();
+	}
     
     // Remove all child elements of an element
     static removeChildren(elementId) {
@@ -26,15 +26,24 @@ class ContentTools {
         }
     }
 
-    // Shows an element
-    static show(element) {
-        if (element.classList.contains("hiddenFeature")) {
-            element.classList.remove("hiddenFeature");
-        };
-    }
+    
+    // Hides or show an element
+    static hideOrShow(id, mobile) {
+        let element = document.getElementById(id);
+        let classString;
 
-    // Hides an element
-    static hide(element) {
-        element.classList.add("hiddenFeature");
+        if (mobile === true) {
+            classString = "hiddenFeatureMob";
+        } else if (mobile === false) {
+            classString = "hiddenFeatureBig";
+        } else {
+            classString = "hiddenFeature";
+        }
+
+        if (element.classList.contains(classString)) {
+            element.classList.remove(classString);
+        } else {
+            element.classList.add(classString);
+        }
     }
 }

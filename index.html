@@ -7,10 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="styles/main.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="">
-    
-        const directories = {about: ["about"], projects: ["minecraft", "poo"]};
-
+    <script type="text/javascript" src="scripts/ContentTools.js">
     </script>
 
     
@@ -19,10 +16,6 @@
 
 
     <!--  
-        
-        Define the page name within an attribute on the page in the nav bar
-
-        Then when the user clicks on the specific page get that html content for the page via ajax and put it in the content
 
         When the user clicks on a different page then remove the content and replace it with the new page's content
 
@@ -31,46 +24,48 @@
 
 <body>
 
-    
-
-        <nav id="sideBar">
-            <ul id="mainNavBar">
-                <li class="canToggle"><div>Home</div></li>
-                <li class="canToggle"><div>About</div></li>
-                <li> 
-                    <div>Projects</div>
-                    <ul class="dropDownContent" id="projectsDropDown">
-                        <li class="dropDownItem"><div>Example One</div></li>
-                        <li class="dropDownItem"><div>Example Two</div></li>
-                    </ul>
-                </li>
-                <li class="canToggle"><div>Contact</div></li>
-            </ul>
-        </nav>
-
-
-        <div id="b_menu" onclick="ContentCreator.expandMenu('main_nav')">
+    <div id="burgerHug">
+        <div id="b_menu" onclick="ContentTools.hideOrShow('sideBar', true); ContentTools.hideOrShow('closeContainer', true)">
             <div class="b_men"></div>
             <div class="b_men"></div>
             <div class="b_men"></div>
         </div>
+    </div>
 
-
-        <div id="sideBarPush">
+    <nav id="sideBar" class="hiddenFeatureMob">
+        <div id="closeContainer" class="hiddenFeatureMob" onclick="ContentTools.hideOrShow('sideBar', true);">
+            &times;
         </div>
+        <ul id="mainNavBar">
+            <li><div>Home</div></li>
+            <li onclick="ContentTools.getPage('content/about.html')"><div>About</div></li>
 
-        <div id="pageContent">
-            <div id="dynamicContent">
-                
+            <li onclick="ContentTools.hideOrShow('projectsDropDown');"> 
+                <div>Projects</div>
+                <ul class="dropDownContent hiddenFeature" id="projectsDropDown">
+                    <li><div>&#8629; Example One</div></li>
+                    <li><div>Example Two</div></li>
+                </ul>
+            </li>
+            <li><div>Contact</div></li>
+        </ul>
+    </nav>
 
-            </div>
+
+
+
+
+    <div id="sideBarPush">
+    </div>
+
+    <div id="pageContent">
+        <div id="dynamicContent">
+            
+
         </div>
+    </div>
 
-    
+
 
 </body>
-
-
-
-
 </html>
