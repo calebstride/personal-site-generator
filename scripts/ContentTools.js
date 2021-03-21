@@ -2,6 +2,7 @@ class ContentTools {
 
     // Send a get request to the html page needed
 	static getPage(send_location) {
+        this.removeChildren("dynamicContent");
 	    var xhttp = new XMLHttpRequest();
 
 	    // Decide what to do when the state changes
@@ -16,11 +17,6 @@ class ContentTools {
 		xhttp.open("GET", send_location, true);
 		xhttp.send();
 	}
-
-    // Remove the content of the "dynamicContent" area
-    static removeContent() {
-        this.removeChildren("dynamicContent");
-    }
 
     // Remove all child elements of an element
     static removeChildren(elementId) {
@@ -75,9 +71,21 @@ class ContentTools {
             }
             elements[i].classList.remove("selected");
         }
-
         if (!removed) {
             element.classList.add("selected");
         }
     }
+
+    // Add click event listeners onto the nav bar buttons
+    static addClickListenersOnNav() {
+        let elements = document.querySelectorAll("#mainNavBar li > div:not(.dropDownButton)");
+
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].addEventListener("click", function() {
+                ContentTools.toggleSelected(this);
+            });
+        }
+    }
+
+
 }

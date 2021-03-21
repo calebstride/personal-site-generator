@@ -8,7 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="styles/main.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="scripts/ContentTools.js"></script>
+    <script type="text/javascript">
+    
+        window.onload = function() {
+            ContentTools.addClickListenersOnNav();
+            document.getElementById("homeButton").click();
+        };
 
+    </script>
     
 </head>
 
@@ -34,19 +41,18 @@
             &times;
         </div>
         <ul id="mainNavBar">
-            <li><div onclick="ContentTools.removeContent();ContentTools.getPage('content/home.html');ContentTools.toggleSelected(this);">Home</div></li>
-            <li><div onclick="ContentTools.removeContent();ContentTools.getPage('content/about.html');ContentTools.toggleSelected(this);">About</div></li>
+            <li><div id="homeButton" onclick="ContentTools.getPage('content/home.html');">Home</div></li>
+            <li><div onclick="ContentTools.getPage('content/about.html');">About</div></li>
             <li> 
                 <div class="dropDownButton" 
-                    onclick="ContentTools.removeContent();
-                    ContentTools.getPage('content/projects.html');
-                    ContentTools.hideOrShowNavBar(this, 'projectsDropDown');">Projects</div>
+                        onclick="ContentTools.getPage('content/projects.html');
+                        ContentTools.hideOrShowNavBar(this, 'projectsDropDown');">Projects</div>
                 <ul class="dropDownContent hiddenFeature" id="projectsDropDown">
                     <li><div>Example One</div></li>
                     <li><div>Example Two</div></li>
                 </ul>
             </li>
-            <li><div onclick="ContentTools.removeContent();ContentTools.getPage('content/contact.html');ContentTools.toggleSelected(this);">Contact</div></li>
+            <li><div onclick="ContentTools.getPage('content/contact.html');">Contact</div></li>
         </ul>
     </nav>
 
