@@ -7,8 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="styles/main.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="scripts/ContentTools.js">
-    </script>
+    <script type="text/javascript" src="scripts/ContentTools.js"></script>
 
     
 </head>
@@ -17,15 +16,13 @@
 
     <!--  
 
-        When the user clicks on a different page then remove the content and replace it with the new page's content
-
         Add current page and/or location in localstorage
     -->
 
 <body>
 
     <div id="burgerHug">
-        <div id="b_menu" onclick="ContentTools.hideOrShow('sideBar', true); ContentTools.hideOrShow('closeContainer', true)">
+        <div id="b_menu" class="hiddenFeatureBig" onclick="ContentTools.hideOrShow('sideBar', true);">
             <div class="b_men"></div>
             <div class="b_men"></div>
             <div class="b_men"></div>
@@ -33,21 +30,23 @@
     </div>
 
     <nav id="sideBar" class="hiddenFeatureMob">
-        <div id="closeContainer" class="hiddenFeatureMob" onclick="ContentTools.hideOrShow('sideBar', true);">
+        <div id="closeContainer"  class="hiddenFeatureBig" onclick="ContentTools.hideOrShow('sideBar', true);">
             &times;
         </div>
         <ul id="mainNavBar">
-            <li><div>Home</div></li>
-            <li onclick="ContentTools.getPage('content/about.html')"><div>About</div></li>
-
-            <li onclick="ContentTools.hideOrShow('projectsDropDown');"> 
-                <div>Projects</div>
+            <li><div onclick="ContentTools.removeContent();ContentTools.getPage('content/home.html');ContentTools.toggleSelected(this);">Home</div></li>
+            <li><div onclick="ContentTools.removeContent();ContentTools.getPage('content/about.html');ContentTools.toggleSelected(this);">About</div></li>
+            <li> 
+                <div class="dropDownButton" 
+                    onclick="ContentTools.removeContent();
+                    ContentTools.getPage('content/projects.html');
+                    ContentTools.hideOrShowNavBar(this, 'projectsDropDown');">Projects</div>
                 <ul class="dropDownContent hiddenFeature" id="projectsDropDown">
-                    <li><div>&#8629; Example One</div></li>
+                    <li><div>Example One</div></li>
                     <li><div>Example Two</div></li>
                 </ul>
             </li>
-            <li><div>Contact</div></li>
+            <li><div onclick="ContentTools.removeContent();ContentTools.getPage('content/contact.html');ContentTools.toggleSelected(this);">Contact</div></li>
         </ul>
     </nav>
 

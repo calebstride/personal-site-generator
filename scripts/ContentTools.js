@@ -16,17 +16,35 @@ class ContentTools {
 		xhttp.open("GET", send_location, true);
 		xhttp.send();
 	}
-    
-    // Remove all child elements of an element
-    static removeChildren(elementId) {
-        // Remove all current accounts
-        let tiles = document.getElementById(elementId);
-        while (tiles.firstChild) {
-            tiles.removeChild(tiles.firstChild);
-        }
+
+    // Remove the content of the "dynamicContent" area
+    static removeContent() {
+        this.removeChildren("dynamicContent");
     }
 
+    // Remove all child elements of an element
+    static removeChildren(elementId) {
+        let element = document.getElementById(elementId);
+        while (element.firstChild) {
+            element.removeChild(element.firstChild);
+        }
+    }
     
+    // Hides or show an element from the nav bar
+    static hideOrShowNavBar(element, id) {
+
+        if (element.classList.contains("selected")) {
+            this.hideOrShow(id);
+            this.toggleSelected(element)
+        } else {
+            if (element.nextElementSibling.classList.contains("hiddenFeature")) {
+                this.hideOrShow(id);
+            } 
+            this.toggleSelected(element)
+        }
+
+    }
+
     // Hides or show an element
     static hideOrShow(id, mobile) {
         let element = document.getElementById(id);
@@ -44,6 +62,22 @@ class ContentTools {
             element.classList.remove(classString);
         } else {
             element.classList.add(classString);
+        }
+    }
+
+    // Toggle the element as selected
+    static toggleSelected(element) {
+        let elements = document.getElementsByClassName("selected");
+        let removed = false;
+        for (let i = 0; i < elements.length; i++) {
+            if (element == elements[i]) {
+                removed = true;
+            }
+            elements[i].classList.remove("selected");
+        }
+
+        if (!removed) {
+            element.classList.add("selected");
         }
     }
 }

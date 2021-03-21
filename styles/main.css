@@ -27,15 +27,19 @@ html, body {
     padding: 10px 0px 10px 10px;
 }
 
-#sideBar #mainNavBar > li > div:hover {
+#sideBar #mainNavBar > li > div:hover, .dropDownContent div:hover{
     cursor: pointer;
     background-color: #333333;
     color: #d2d2d2;
 }
 
-#dynamicContent {
-    height: 100px;
-    background-color: green;
+.dropDownContent div {
+    padding: 4px 0px 4px 20px;
+}
+
+.selected {
+    background-color: #333333;
+    color: #d2d2d2;
 }
 
 .hiddenFeature {
@@ -116,7 +120,7 @@ html, body {
         overflow: hidden;
     }
 
-    #b_menu, #closeContainer, .hiddenFeatureBig {
+    .hiddenFeatureBig {
         display: none;
     }
 
