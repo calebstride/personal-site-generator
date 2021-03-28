@@ -6,7 +6,10 @@
     <title>Home</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link href="styles/main.css" rel="stylesheet" type="text/css" />
+    <link href="styles/pages.css" rel="stylesheet" type="text/css" />
+
     <script type="text/javascript" src="scripts/ContentTools.js"></script>
     <script type="text/javascript">
     
@@ -18,7 +21,6 @@
     </script>
     
 </head>
-
 
 
     <!--  
@@ -40,6 +42,7 @@
         <div id="closeContainer"  class="hiddenFeatureBig" onclick="ContentTools.hideOrShow('sideBar', true);">
             &times;
         </div>
+        
         <ul id="mainNavBar">
             <li><div id="homeButton" onclick="ContentTools.getPage('content/home.html');">Home</div></li>
             <li><div onclick="ContentTools.getPage('content/about.html');">About</div></li>
@@ -47,9 +50,10 @@
                 <div class="dropDownButton" 
                         onclick="ContentTools.getPage('content/projects.html');
                         ContentTools.hideOrShowNavBar(this, 'projectsDropDown');">Projects</div>
+
                 <ul class="dropDownContent hiddenFeature" id="projectsDropDown">
-                    <li><div>Example One</div></li>
-                    <li><div>Example Two</div></li>
+                    <li><div onclick="ContentTools.getPage('content/projects/project1.html');">Example One</div></li>
+                    <li><div onclick="ContentTools.getPage('content/projects.html');">Example Two</div></li>
                 </ul>
             </li>
             <li><div onclick="ContentTools.getPage('content/contact.html');">Contact</div></li>

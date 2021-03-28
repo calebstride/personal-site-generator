@@ -1,4 +1,22 @@
+.mainTitle {
+    text-align: center;
+    background-color: #808080;
+    margin: 0;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
 
+#siteGreeting {
+    text-align: center;
+    padding-top: 30%;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.paddedContent {
+    padding-left: 3%;
+    padding-right: 3%;
+}
 
 @media screen and (max-width: 600px) {
 
