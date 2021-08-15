@@ -6,16 +6,20 @@
     <title>Home</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">  
+    <meta name="author" content="Caleb Stride">
 
     <link href="styles/main.css" rel="stylesheet" type="text/css" />
     <link href="styles/pages.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="scripts/ContentTools.js"></script>
+    <script type="text/javascript" src="scripts/PageSummary.js"></script>
     <script type="text/javascript">
     
         window.onload = function() {
             ContentTools.addClickListenersOnNav();
-            document.getElementById("homeButton").click();
+            ContentTools.getPage('content/home.html');
+            ContentTools.toggleSelected(document.getElementById("homeButton"));
         };
 
     </script>
@@ -48,11 +52,11 @@
             <li><div onclick="ContentTools.getPage('content/about.html');">About</div></li>
             <li> 
                 <div class="dropDownButton" 
-                        onclick="ContentTools.getPage('content/projects.html');
-                        ContentTools.hideOrShowNavBar(this, 'projectsDropDown');">Projects</div>
+                    onclick="ContentTools.getPage('content/projects.html');
+                    ContentTools.hideOrShowNavBar(this, 'projectsDropDown');">Projects</div>
 
                 <ul class="dropDownContent hiddenFeature" id="projectsDropDown">
-                    <li><div onclick="ContentTools.getPage('content/projects/project1.html');">Example One</div></li>
+                    <li><div onclick="ContentTools.getPage('content/projects/project1.html', true);">Example One</div></li>
                     <li><div onclick="ContentTools.getPage('content/projects.html');">Example Two</div></li>
                 </ul>
             </li>

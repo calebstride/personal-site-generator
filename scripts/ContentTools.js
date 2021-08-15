@@ -1,7 +1,7 @@
 class ContentTools {
 
     // Send a get request to the html page needed
-	static getPage(send_location) {
+	static getPage(sendLocation, createDocNavBar = false) {
         this.removeChildren("dynamicContent");
 	    var xhttp = new XMLHttpRequest();
 
@@ -10,11 +10,15 @@ class ContentTools {
 	        // If response ready and http request OK
 	        if (this.readyState === 4 && this.status === 200) {
 	            document.getElementById("dynamicContent").innerHTML = this.responseText;
+                window.localStorage.setItem("currentPage", sendLocation);
+                if (createDocNavBar) {
+                    PageSummary.createNavMenuForPage("docMenuArea");
+                }
 	        }
 	    };  
 
 	    // Decide whether to post or get the values
-		xhttp.open("GET", send_location, true);
+		xhttp.open("GET", sendLocation, true);
 		xhttp.send();
 	}
 
@@ -87,5 +91,15 @@ class ContentTools {
         }
     }
 
+    // Get the map of webpages on the website
+    static getWebPagesMap() {
+        return [{"page" : "content/home.html", "name" : "Home"},
+                {"page" : "content/about.html", "name" : "About"},
+                {"page" : "content/projects.html", "name" : "Projects", "children" : [
+                    {"page" : "content/projects/project1.html", "name" : "Project One"},
+                    {"page" : "content/projects.html", "name" : "Projects"}
+                ]},
+                {"page" : "content/contact.html", "name" : "Contact"}];
+    }
 
 }
