@@ -17,8 +17,7 @@
     <script type="text/javascript">
     
         window.onload = function() {
-            ContentTools.addClickListenersOnNav();
-            ContentTools.getPage('content/home.html');
+            ContentTools.createMainNavBar();
             ContentTools.toggleSelected(document.getElementById("homeButton"));
         };
 
@@ -26,47 +25,7 @@
     
 </head>
 
-
-    <!--  
-
-        Add current page and/or location in localstorage
-    -->
-
 <body>
-
-    <div id="burgerHug">
-        <div id="b_menu" class="hiddenFeatureBig" onclick="ContentTools.hideOrShow('sideBar', true);">
-            <div class="b_men"></div>
-            <div class="b_men"></div>
-            <div class="b_men"></div>
-        </div>
-    </div>
-
-    <nav id="sideBar" class="hiddenFeatureMob">
-        <div id="closeContainer"  class="hiddenFeatureBig" onclick="ContentTools.hideOrShow('sideBar', true);">
-            &times;
-        </div>
-        
-        <ul id="mainNavBar">
-            <li><div id="homeButton" onclick="ContentTools.getPage('content/home.html');">Home</div></li>
-            <li><div onclick="ContentTools.getPage('content/about.html');">About</div></li>
-            <li> 
-                <div class="dropDownButton" 
-                    onclick="ContentTools.getPage('content/projects.html');
-                    ContentTools.hideOrShowNavBar(this, 'projectsDropDown');">Projects</div>
-
-                <ul class="dropDownContent hiddenFeature" id="projectsDropDown">
-                    <li><div onclick="ContentTools.getPage('content/projects/project1.html', true);">Example One</div></li>
-                    <li><div onclick="ContentTools.getPage('content/projects.html');">Example Two</div></li>
-                </ul>
-            </li>
-            <li><div onclick="ContentTools.getPage('content/contact.html');">Contact</div></li>
-        </ul>
-    </nav>
-
-
-
-
 
     <div id="sideBarPush">
     </div>
@@ -74,6 +33,11 @@
     <div id="pageContent">
         <div id="dynamicContent">
             
+            <div id="siteGreeting">
+                <div>Hello</div>
+                <div>And</div>
+                <div>Welcome</div>
+            </div>
 
         </div>
     </div>
