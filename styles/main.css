@@ -33,6 +33,12 @@ html, body {
     color: #d2d2d2;
 }
 
+#sideBar a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
 .dropDownContent div {
     padding: 4px 0px 4px 20px;
 }

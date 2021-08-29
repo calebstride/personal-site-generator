@@ -58,24 +58,12 @@ class ContentTools {
         }
     }
 
-    // Add click event listeners onto the nav bar buttons
-    static addClickListenersOnNav() {
-        let elements = document.querySelectorAll("#mainNavBar li > div:not(.dropDownButton)");
-
-        for (let i = 0; i < elements.length; i++) {
-            elements[i].addEventListener("click", function() {
-                ContentTools.toggleSelected(this);
-            });
-        }
-    }
-
     // Get the map of webpages on the website
     static getWebPagesMap() {
         return [{"page" : "index.html", "name" : "Home"},
                 {"page" : "about.html", "name" : "About"},
                 {"page" : "projects.html", "name" : "Projects", "children" : [
-                    {"page" : "projects/project1.html", "name" : "Project One"},
-                    {"page" : "projects.html", "name" : "Projects"}
+                    {"page" : "projects/project1.html", "name" : "Project One"}
                 ]},
                 {"page" : "contact.html", "name" : "Contact"}];
     }
@@ -108,6 +96,7 @@ class ContentTools {
         for (let i = 0; i < webLayoutArray.length; i++) {
             const pageObject = webLayoutArray[i];
             let menuButton = document.createElement("li");
+            
             if (pageObject.children == undefined) {
 
                 let buttonContent = document.createElement("div");
@@ -116,6 +105,7 @@ class ContentTools {
                 };
                 buttonContent.appendChild(this.createLinkText(pageObject.name, pageObject.page));
                 menuButton.appendChild(buttonContent);
+                this.setElementSelectedNav(menuButton, pageObject.page);
             } else {
 
                 let buttonDropdown = document.createElement("div");
@@ -125,6 +115,8 @@ class ContentTools {
                     ContentTools.hideOrShowNavBar(this, pageObject.name + 'DropDown');
                 };
                 menuButton.appendChild(buttonDropdown);
+                this.setElementSelectedNav(buttonDropdown, pageObject.page);
+
                 let dropDownContent = document.createElement("ul");
                 dropDownContent.classList.add("dropDownContent", "hiddenFeature");
                 dropDownContent.id = pageObject.name + 'DropDown';
@@ -132,6 +124,13 @@ class ContentTools {
                 menuButton.appendChild(dropDownContent);
             }
             elementParent.appendChild(menuButton);
+        }
+    }
+
+    // Sets the nav bar button as selected
+    static setElementSelectedNav(element, link) {
+        if (window.location.pathname.substring(1, window.location.pathname.length) == link) {
+            this.toggleSelected(element);
         }
     }
 
