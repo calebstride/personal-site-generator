@@ -60,12 +60,12 @@ class ContentTools {
 
     // Get the map of webpages on the website
     static getWebPagesMap() {
-        return [{"page" : "index.html", "name" : "Home"},
-                {"page" : "about.html", "name" : "About"},
-                {"page" : "projects.html", "name" : "Projects", "children" : [
-                    {"page" : "projects/project1.html", "name" : "Project One"}
+        return [{"page" : "/index.html", "name" : "Home"},
+                {"page" : "/about.html", "name" : "About"},
+                {"page" : "/projects.html", "name" : "Projects", "children" : [
+                    {"page" : "/projects/project1.html", "name" : "Project One"}
                 ]},
-                {"page" : "contact.html", "name" : "Contact"}];
+                {"page" : "/contact.html", "name" : "Contact"}];
     }
 
 
@@ -93,6 +93,8 @@ class ContentTools {
 
     // Creates the nav bar buttons and adds them to the elementParent
     static createNavBarButtons(webLayoutArray, elementParent) {
+        let isExpand = false;
+
         for (let i = 0; i < webLayoutArray.length; i++) {
             const pageObject = webLayoutArray[i];
             let menuButton = document.createElement("li");
@@ -100,38 +102,39 @@ class ContentTools {
             if (pageObject.children == undefined) {
 
                 let buttonContent = document.createElement("div");
-                buttonContent.onclick = function(){
-                    ContentTools.toggleSelected(this);
-                };
                 buttonContent.appendChild(this.createLinkText(pageObject.name, pageObject.page));
                 menuButton.appendChild(buttonContent);
-                this.setElementSelectedNav(menuButton, pageObject.page);
+                isExpand = this.setElementSelectedNav(menuButton, pageObject.page);
             } else {
 
                 let buttonDropdown = document.createElement("div");
                 buttonDropdown.className = "dropDownButton";
+                buttonDropdown.id = pageObject.name + 'DropDownB';
                 buttonDropdown.appendChild(this.createLinkText(pageObject.name, pageObject.page));
-                buttonDropdown.onclick = function(){
-                    ContentTools.hideOrShowNavBar(this, pageObject.name + 'DropDown');
-                };
                 menuButton.appendChild(buttonDropdown);
-                this.setElementSelectedNav(buttonDropdown, pageObject.page);
+                isExpand = this.setElementSelectedNav(buttonDropdown, pageObject.page);
 
                 let dropDownContent = document.createElement("ul");
-                dropDownContent.classList.add("dropDownContent", "hiddenFeature");
+                dropDownContent.className = "dropDownContent";
                 dropDownContent.id = pageObject.name + 'DropDown';
-                this.createNavBarButtons(pageObject.children, dropDownContent);
+                let shouldExpand = this.createNavBarButtons(pageObject.children, dropDownContent);
+                if (!shouldExpand && !isExpand) {
+                    dropDownContent.classList.add("hiddenFeature");
+                }
                 menuButton.appendChild(dropDownContent);
             }
             elementParent.appendChild(menuButton);
         }
+        return isExpand;
     }
 
     // Sets the nav bar button as selected
     static setElementSelectedNav(element, link) {
-        if (window.location.pathname.substring(1, window.location.pathname.length) == link) {
+        if (window.location.pathname == link) {
             this.toggleSelected(element);
+            return true;
         }
+        return false;
     }
 
     // Creates a link with the given text
@@ -148,7 +151,7 @@ class ContentTools {
         closeButton.id = "closeContainer";
         closeButton.className = "hiddenFeatureBig";
         closeButton.onclick = function(){ContentTools.hideOrShow('sideBar', true);};
-        closeButton.textContent = "&times;";
+        closeButton.innerHTML = "&times;";
         return closeButton;
     }
 

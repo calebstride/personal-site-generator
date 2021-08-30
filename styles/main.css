@@ -22,11 +22,6 @@ html, body {
     padding: 0;
 }
 
-#sideBar #mainNavBar > li > div {
-    display: block;
-    padding: 10px 0px 10px 10px;
-}
-
 #sideBar #mainNavBar > li > div:hover, .dropDownContent div:hover {
     cursor: pointer;
     background-color: #333333;
@@ -37,9 +32,10 @@ html, body {
     display: block;
     text-decoration: none;
     color: inherit;
+    padding: 10px 10px 8px 10px;
 }
 
-.dropDownContent div {
+#sideBar .dropDownContent a {
     padding: 4px 0px 4px 20px;
 }
 

@@ -18,6 +18,35 @@
     padding-right: 3%;
 }
 
+.docMenuLink {
+    display: block;
+    padding-bottom: 5px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.docMenuLink:hover {
+    color: #808080;
+}
+
+#docMenuArea {
+    padding-left: 10%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+}
+
+.headerRowH3 {
+    padding-left: 30px;
+}
+
+.headerRowH4 {
+    padding-left: 60px;
+}
+
+.headerRowH5 {
+    padding-left: 90px;
+}
+
 @media screen and (max-width: 600px) {
 
 }
