@@ -11,14 +11,14 @@ class ContentTools {
     // Hides or show an element from the nav bar
     static hideOrShowNavBar(element, id) {
 
-        if (element.classList.contains("selected")) {
+        if (element.classList.contains("selectedDD")) {
             this.hideOrShow(id);
-            this.toggleSelected(element)
+            this.toggleSelected(element, "selectedDD")
         } else {
             if (element.nextElementSibling.classList.contains("hiddenFeature")) {
                 this.hideOrShow(id);
             } 
-            this.toggleSelected(element)
+            this.toggleSelected(element, "selectedDD")
         }
 
     }
@@ -44,17 +44,17 @@ class ContentTools {
     }
 
     // Toggle the element as selected
-    static toggleSelected(element) {
-        let elements = document.getElementsByClassName("selected");
+    static toggleSelected(element, selectedString = "selected") {
+        let elements = document.getElementsByClassName(selectedString);
         let removed = false;
         for (let i = 0; i < elements.length; i++) {
             if (element == elements[i]) {
                 removed = true;
             }
-            elements[i].classList.remove("selected");
+            elements[i].classList.remove(selectedString);
         }
         if (!removed) {
-            element.classList.add("selected");
+            element.classList.add(selectedString);
         }
     }
 
@@ -62,7 +62,7 @@ class ContentTools {
     static getWebPagesMap() {
         return [{"page" : "/index.html", "name" : "Home"},
                 {"page" : "/about.html", "name" : "About"},
-                {"page" : "/projects.html", "name" : "Projects", "children" : [
+                {"page" : "", "name" : "Projects", "children" : [
                     {"page" : "/projects/project1.html", "name" : "Project One"}
                 ]},
                 {"page" : "/contact.html", "name" : "Contact"}];
@@ -100,31 +100,40 @@ class ContentTools {
             let menuButton = document.createElement("li");
             
             if (pageObject.children == undefined) {
-
                 let buttonContent = document.createElement("div");
                 buttonContent.appendChild(this.createLinkText(pageObject.name, pageObject.page));
                 menuButton.appendChild(buttonContent);
                 isExpand = this.setElementSelectedNav(menuButton, pageObject.page);
             } else {
-
-                let buttonDropdown = document.createElement("div");
-                buttonDropdown.className = "dropDownButton";
-                buttonDropdown.id = pageObject.name + 'DropDownB';
-                buttonDropdown.appendChild(this.createLinkText(pageObject.name, pageObject.page));
-                menuButton.appendChild(buttonDropdown);
-                isExpand = this.setElementSelectedNav(buttonDropdown, pageObject.page);
-
-                let dropDownContent = document.createElement("ul");
-                dropDownContent.className = "dropDownContent";
-                dropDownContent.id = pageObject.name + 'DropDown';
-                let shouldExpand = this.createNavBarButtons(pageObject.children, dropDownContent);
-                if (!shouldExpand && !isExpand) {
-                    dropDownContent.classList.add("hiddenFeature");
-                }
-                menuButton.appendChild(dropDownContent);
+                isExpand = this.createParentNavButton(menuButton, pageObject);
             }
             elementParent.appendChild(menuButton);
         }
+        return isExpand;
+    }
+
+    // Deals with the nav bar button that will contain child links
+    static createParentNavButton(menuButton, pageObject) {
+        let buttonDropdown = document.createElement("div");
+        buttonDropdown.className = "dropDownButton";
+        buttonDropdown.id = pageObject.name + 'DropDownB';
+        buttonDropdown.appendChild(this.createLinkText(pageObject.name, pageObject.page));
+        if (pageObject.page.length === 0) {
+            buttonDropdown.onclick = function() {ContentTools.hideOrShowNavBar(this, (pageObject.name + 'DropDown'));};
+        }
+        menuButton.appendChild(buttonDropdown);
+        let isExpand = this.setElementSelectedNav(buttonDropdown, pageObject.page);
+
+        let dropDownContent = document.createElement("ul");
+        dropDownContent.className = "dropDownContent";
+        dropDownContent.id = pageObject.name + 'DropDown';
+        let shouldExpand = this.createNavBarButtons(pageObject.children, dropDownContent);
+        if (!shouldExpand && !isExpand) {
+            dropDownContent.classList.add("hiddenFeature");
+        } else {
+            buttonDropdown.classList.add("selectedDD");
+        }
+        menuButton.appendChild(dropDownContent);
         return isExpand;
     }
 
@@ -140,7 +149,9 @@ class ContentTools {
     // Creates a link with the given text
     static createLinkText(linkText, link) {
         let linkTag = document.createElement('a');
-        linkTag.href = link;
+        if (link.length !== 0) {
+            linkTag.href = link;
+        }
         linkTag.textContent = linkText;
         return linkTag;
     }
