@@ -31,12 +31,10 @@ class PageSummary {
         row.classList.add("headerRow" + header.nodeName, "docMenuLink");
 
         if (header.id == false) {
-            header.id = "headerGenId" + numbers.join("");
+            header.id = header.textContent.replaceAll(" ", "");
         }
         row.href = "#" + header.id;
         return row;
     }
-
-    static createNumberFromNumbers 
 
 }

@@ -14,11 +14,13 @@ class ContentTools {
         if (element.classList.contains("selectedDD")) {
             this.hideOrShow(id);
             this.toggleSelected(element, "selectedDD")
+            window.sessionStorage.setItem(element.id.replace("DropDownB", ""), false);
         } else {
             if (element.nextElementSibling.classList.contains("hiddenFeature")) {
                 this.hideOrShow(id);
             } 
             this.toggleSelected(element, "selectedDD")
+            window.sessionStorage.setItem(element.id.replace("DropDownB", ""), true);
         }
 
     }
@@ -63,8 +65,7 @@ class ContentTools {
         return [{"page" : "/index.html", "name" : "Home"},
                 {"page" : "/about.html", "name" : "About"},
                 {"page" : "", "name" : "Projects", "children" : [
-                    {"page" : "/projects/project1.html", "name" : "Project One"}
-                ]},
+                    {"page" : "/projects/project1.html", "name" : "Project One"}]},
                 {"page" : "/contact.html", "name" : "Contact"}];
     }
 
@@ -103,7 +104,7 @@ class ContentTools {
                 let buttonContent = document.createElement("div");
                 buttonContent.appendChild(this.createLinkText(pageObject.name, pageObject.page));
                 menuButton.appendChild(buttonContent);
-                isExpand = this.setElementSelectedNav(menuButton, pageObject.page);
+                isExpand = this.setElementSelectedNav(menuButton, pageObject);
             } else {
                 isExpand = this.createParentNavButton(menuButton, pageObject);
             }
@@ -122,7 +123,7 @@ class ContentTools {
             buttonDropdown.onclick = function() {ContentTools.hideOrShowNavBar(this, (pageObject.name + 'DropDown'));};
         }
         menuButton.appendChild(buttonDropdown);
-        let isExpand = this.setElementSelectedNav(buttonDropdown, pageObject.page);
+        let isExpand = this.setElementSelectedNav(buttonDropdown, pageObject);
 
         let dropDownContent = document.createElement("ul");
         dropDownContent.className = "dropDownContent";
@@ -138,9 +139,11 @@ class ContentTools {
     }
 
     // Sets the nav bar button as selected
-    static setElementSelectedNav(element, link) {
-        if (window.location.pathname == link) {
+    static setElementSelectedNav(element, pageObject) {
+        if (window.location.pathname == pageObject.page) {
             this.toggleSelected(element);
+            return true;
+        }  else if (window.sessionStorage.getItem(pageObject.name.replaceAll(" ", "")) == "true") {
             return true;
         }
         return false;
