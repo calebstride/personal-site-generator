@@ -1,0 +1,22 @@
+{
+  "name": "personal-site",
+  "version": "0.1.0",
+  "description": "Compiles the site ready for deployment",
+  "main": "renderResources.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CalebStride/personal-site.git"
+  },
+  "author": "Caleb Stride",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CalebStride/personal-site/issues"
+  },
+  "homepage": "https://github.com/CalebStride/personal-site#readme",
+  "dependencies": {
+    "marked": "~4"
+  }
+}

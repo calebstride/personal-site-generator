@@ -1,4 +1,4 @@
-.mainTitle {
+#dynamicContent h1 {
     text-align: center;
     background-color: #808080;
     margin: 0;
@@ -13,7 +13,7 @@
     font-weight: bold;
 }
 
-.paddedContent {
+#dynamicContent :not(h1) {
     padding-left: 3%;
     padding-right: 3%;
 }
