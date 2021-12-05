@@ -2,6 +2,11 @@ class PageSummary {
 
     // Create the nav menu for the given page
     static createNavMenuForPage(idMenuArea = "docMenuArea") {
+        const appendArea = document.getElementById(idMenuArea);
+        if (appendArea == null) {
+            return;
+        }
+
         const pageHeaderTypes = ["H2", "H3", "H4", "H5"];
         const pageHeaders = document.querySelectorAll("h2, h3, h4, h5");
         let numbering = [0, 0, 0, 0];
@@ -20,7 +25,6 @@ class PageSummary {
             menu.appendChild(this.createLinkForHeader(pageHeaders[i], numbering.filter(function(x){return x !== 0;})));
         }
 
-        const appendArea = document.getElementById(idMenuArea);
         appendArea.appendChild(menu);
     } 
 
