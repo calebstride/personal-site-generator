@@ -62,11 +62,7 @@ class ContentTools {
 
     // Get the map of webpages on the website
     static getWebPagesMap() {
-        return [{"page" : "/index.html", "name" : "Home"},
-                {"page" : "/about.html", "name" : "About"},
-                {"page" : "", "name" : "Projects", "children" : [
-                    {"page" : "/projects/project1.html", "name" : "Project One"}]},
-                {"page" : "/contact.html", "name" : "Contact"}];
+        return [SITEMAP];
     }
 
 
