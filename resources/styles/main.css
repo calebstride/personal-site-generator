@@ -35,8 +35,12 @@ html, body {
     padding: 10px 10px 8px 10px;
 }
 
+#sideBar .dropDownContent{
+    padding-left: 16px;
+}
+
 #sideBar .dropDownContent a {
-    padding: 4px 0px 4px 20px;
+    padding: 4px 0px 4px 6px;
 }
 
 .selected {

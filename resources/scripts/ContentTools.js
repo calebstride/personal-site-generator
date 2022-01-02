@@ -13,13 +13,13 @@ class ContentTools {
 
         if (element.classList.contains("selectedDD")) {
             this.hideOrShow(id);
-            this.toggleSelected(element, "selectedDD")
+            element.classList.toggle("selectedDD");
             window.sessionStorage.setItem(element.id.replace("DropDownB", ""), false);
         } else {
             if (element.nextElementSibling.classList.contains("hiddenFeature")) {
                 this.hideOrShow(id);
             } 
-            this.toggleSelected(element, "selectedDD")
+            element.classList.toggle("selectedDD");
             window.sessionStorage.setItem(element.id.replace("DropDownB", ""), true);
         }
 
@@ -139,7 +139,7 @@ class ContentTools {
         if (window.location.pathname == pageObject.page) {
             this.toggleSelected(element);
             return true;
-        }  else if (window.sessionStorage.getItem(pageObject.name.replaceAll(" ", "")) == "true") {
+        }  else if (window.sessionStorage.getItem(pageObject.name) == "true") {
             return true;
         }
         return false;

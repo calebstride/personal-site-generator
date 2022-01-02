@@ -1,6 +1,7 @@
 // Create reference instance
 var marked = require('marked');
 var fs = require('fs');
+const renderHelper = require("./renderResourcesHelper.js");
 
 // Used to get the files that need formatting
 var getFilesToPrepare = function () {
@@ -14,6 +15,11 @@ var getFilesToPrepare = function () {
 				return 1;
 			} else if (b.includes('contact.md')) {
 				return -1;
+			}
+			if (a.includes('index.md')) {
+				return -1;
+			} else if (b.includes('index.md')) {
+				return 1;
 			}
 			return 0;
 		} else if (a.includes('.md')) {
@@ -66,40 +72,6 @@ var findBetterDisplayName = function (fileName) {
 	}
 }
 
-// Adds the given file to the site map to be added directly to a javascript file
-var addFileToSiteMap = function (siteMap, directory, name) {
-	let resourceDir = directory.split('\\website\\').pop();
-	let siteMapSegment = siteMap;
-	let pageInfo;
-
-	if (resourceDir.includes('\\')) {
-		let parentsAndFile = resourceDir.split('\\');
-		for (let parI = 0; parI < parentsAndFile.length - 1; parI++) {
-			let parentName = parentsAndFile[parI].charAt(0).toUpperCase() + parentsAndFile[parI].slice(1);
-			
-			siteMapSegment = findMapSegment(siteMapSegment, parentName);
-		}
-		pageInfo = { page: '/' + parentsAndFile.join('/'), name: name};
-	} else {
-		let fileName = '/' + resourceDir;
-		pageInfo = { page: fileName, name: name };
-	}
-
-	siteMapSegment.push(pageInfo);
-};
-
-// Find the segment of the site map from the given parent name
-var findMapSegment = function (siteMapSegment, parentName) {
-	for (let mapI = 0; mapI < siteMapSegment.length; mapI++) {
-		if (siteMapSegment[mapI].page === '' && siteMapSegment[mapI].name === parentName) {
-			return siteMapSegment[mapI].children;
-		}
-	}
-	let pageInfo = { page: '', name: parentName, children: []};
-	siteMapSegment.push(pageInfo);
-	return pageInfo.children;
-}
-
 //////////// SCRIPT STARTS HERE ///////////////////
 // Remove the website directory if it exists
 const path = process.cwd();
@@ -148,33 +120,25 @@ files.forEach((file) => {
 			let newPage;
 
 			if (file.includes('.md')) {
+				// Replace the page content with rendered md
 				const compiledMd = marked.parse(content.toString());
 				newPage = template.replace('[PAGECONTENT]', compiledMd);
+
+				// Replace the title with the page title
 				let pageTitle = findPageTitle(file, newPage);
 				newPage = newPage.replace('[PAGENAME]', pageTitle);	
+
 				// Add the file to the site map object
 				file = file.replace('resources', 'website').replace('.md', '.html');
-				addFileToSiteMap(siteMap, file, pageTitle);
+				renderHelper.addFileToSiteMap(siteMap, file, pageTitle);
 			} else {
 				newPage = content.toString().replace('[SITEMAP]', JSON.stringify(siteMap));
 				file = file.replace('resources', 'website');
 			}
 		
-			try {
-				fs.writeFileSync(file, newPage);
-				//file written successfully
-			} catch (err) {
-				console.error(err);
-				return;
-			}
+			fs.writeFileSync(file, newPage);
 		} else {
-			try {
-				fs.copyFileSync(file, file.replace('resources', 'website'));
-				//file copied successfully
-			} catch (err) {
-				console.error(err);
-				return;
-			}
+			fs.copyFileSync(file, file.replace('resources', 'website'));
 		}
 	} catch (err) {
 		console.error(err);
