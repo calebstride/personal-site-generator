@@ -13,7 +13,7 @@
     font-weight: bold;
 }
 
-#dynamicContent :not(h1) {
+#dynamicContent :not(h1):not(a) {
     padding-left: 3%;
     padding-right: 3%;
 }
