@@ -38,4 +38,4 @@ function splitCamelCaseName(name) {
 	return name.match(/[A-Z][a-z]+/g).join(" ");
 }
 
-module.exports = { addFileToSiteMap };
+module.exports = { addFileToSiteMap, splitCamelCaseName };

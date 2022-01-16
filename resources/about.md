@@ -1,5 +1,3 @@
-# About Me
-
 Hi, I'm Caleb Stride, a Computer Science graduate from Cardiff University.
 
 This website is where I upload and talk about projects I'm working on, or just ideas that could become something later. 

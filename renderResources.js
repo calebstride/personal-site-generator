@@ -2,6 +2,7 @@
 var marked = require('marked');
 var fs = require('fs');
 const renderHelper = require("./renderResourcesHelper.js");
+const { title } = require('process');
 
 // Used to get the files that need formatting
 var getFilesToPrepare = function () {
@@ -52,19 +53,19 @@ var readAndAddResource = function (directory, listOfResources) {
 	}
 };
 
-var findPageTitle = function (fileName, pageContents) {
-	let title = findBetterDisplayName(fileName.split('\\resources\\').pop());
+// Used to find a name (used in nav bar and tab) or title (used in page title) based on the given file and map to change it to
+var findPageTitle = function (fileName, nameMap) {
+	let tempName = fileName.split('\\').pop();
+	let title = findBetterDisplayName(tempName, nameMap);
 	if (title == null) {
-		title = pageContents.match(/h1(.*)<\/h1>/g);
-		if (title != null && title.length == 1) {
-			title = title[0].substring(title[0].indexOf('>') + 1, title[0].indexOf('<'));
-		}
+		tempName = tempName.charAt(0).toUpperCase() + tempName.slice(1, tempName.indexOf('.'));
+		title = renderHelper.splitCamelCaseName(tempName);
 	}
 	return title;
 };
 
-// Using the nameMap; finds a better display name (Used in the ui for describing the page) if one is provided
-var findBetterDisplayName = function (fileName) {
+// Using the nameMap, finds a better name
+var findBetterDisplayName = function (fileName, nameMap) {
 	if (nameMap.get(fileName) == undefined) {
 		return null;
 	} else {
@@ -76,9 +77,12 @@ var findBetterDisplayName = function (fileName) {
 // Remove the website directory if it exists
 const path = process.cwd();
 const nameMap = new Map();
-nameMap.set('about.md', 'About');
 nameMap.set('index.md', 'Home');
-nameMap.set('contact.md', 'Contact');
+
+const titleMap = new Map();
+titleMap.set('about.md', 'About Me');
+titleMap.set('contact.md', 'Contact Me');
+titleMap.set('index.md', '');
 
 try {
 	fs.rmSync(path + '\\website', { recursive: true, force: true });
@@ -125,12 +129,13 @@ files.forEach((file) => {
 				newPage = template.replace('[PAGECONTENT]', compiledMd);
 
 				// Replace the title with the page title
-				let pageTitle = findPageTitle(file, newPage);
-				newPage = newPage.replace('[PAGENAME]', pageTitle);	
+				let pageName = findPageTitle(file, nameMap);
+				newPage = newPage.replace('[PAGENAME]', pageName);	
+				newPage = newPage.replace('[PAGETITLE]', findPageTitle(file, titleMap));	
 
 				// Add the file to the site map object
 				file = file.replace('resources', 'website').replace('.md', '.html');
-				renderHelper.addFileToSiteMap(siteMap, file, pageTitle);
+				renderHelper.addFileToSiteMap(siteMap, file, pageName);
 			} else {
 				newPage = content.toString().replace('[SITEMAP]', JSON.stringify(siteMap));
 				file = file.replace('resources', 'website');

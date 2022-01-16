@@ -1,5 +1,3 @@
-# Old Implementation
-
 ## Summary
 
 This is a brief summary about the project.

@@ -6,16 +6,16 @@
     padding-bottom: 3%;
 }
 
+#pageText {
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
 #siteGreeting {
     text-align: center;
     padding-top: 40vh;
     font-size: 2em;
     font-weight: bold;
-}
-
-#dynamicContent :not(h1):not(a) {
-    padding-left: 3%;
-    padding-right: 3%;
 }
 
 .docMenuLink {
