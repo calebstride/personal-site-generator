@@ -124,8 +124,8 @@ class ContentTools {
         let dropDownContent = document.createElement("ul");
         dropDownContent.className = "dropDownContent";
         dropDownContent.id = pageObject.name + 'DropDown';
-        let shouldExpand = this.createNavBarButtons(pageObject.children, dropDownContent);
-        if (!shouldExpand && !isExpand) {
+        this.createNavBarButtons(pageObject.children, dropDownContent);
+        if (!isExpand) {
             dropDownContent.classList.add("hiddenFeature");
         } else {
             buttonDropdown.classList.add("selectedDD");

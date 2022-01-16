@@ -33,6 +33,7 @@ html, body {
     text-decoration: none;
     color: inherit;
     padding: 10px 10px 8px 10px;
+    user-select: none;
 }
 
 #sideBar .dropDownContent{
