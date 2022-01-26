@@ -1,8 +1,7 @@
 // Create reference instance
 var marked = require('marked');
 var fs = require('fs');
-const renderHelper = require("./renderResourcesHelper.js");
-const { title } = require('process');
+const renderHelper = require("./src/renderResourcesHelper.js");
 
 // Used to get the files that need formatting
 var getFilesToPrepare = function () {
