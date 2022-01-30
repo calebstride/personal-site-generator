@@ -1,6 +1,0 @@
-pageContent: # This stores some default value to be overridden in templates
-    title: Page Title
-    header: Page Header
-    content: ~
-
-layout: template.html

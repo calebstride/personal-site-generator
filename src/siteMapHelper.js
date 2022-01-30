@@ -1,7 +1,7 @@
 //////// THE FOLLOWING IS CODE RELATED TO THE SITE MAP
 // Adds the given file to the site map to be added directly to a javascript file
 function addFileToSiteMap(siteMap, directory, name) {
-	let resourceDir = directory.split('\\website\\').pop();
+	let resourceDir = directory.split('\\public\\').pop();
 	let siteMapSegment = siteMap;
 	let pageInfo;
 
@@ -37,5 +37,3 @@ function findMapSegment(siteMapSegment, parentName) {
 function splitCamelCaseName(name) {
 	return name.match(/[A-Z][a-z]+/g).join(" ");
 }
-
-module.exports = { addFileToSiteMap, splitCamelCaseName };

@@ -10,8 +10,10 @@ This requires [node.js](https://nodejs.org/en/download/) and the [markedjs marke
 
 ## **Setup**
 
-After installing node then run:  
+Place all the files you want to turn into a website into the /resources/siteContent directory. Then run the code after installing node by doing the following:
     
     $ npm install
 
     $ node renderResources.js
+
+Everything in resources/siteContent will be moved and rendered to the /public directory. 
