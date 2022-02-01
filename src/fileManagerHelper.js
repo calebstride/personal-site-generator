@@ -58,4 +58,15 @@ function readAndAddResource(directory, listOfResources) {
 	}
 };
 
-module.exports = {removePublicDirectory, createPublicDirectory, readFile, getFilesToPrepare};
+function createJsSiteMap(path, siteMap) {
+	try {
+		let content = "const siteMap = " + JSON.stringify(siteMap);
+		fs.writeFileSync(path + '\\public', content);
+	} catch (error) {
+		console.error(err);
+		return;
+	}
+	
+}
+
+module.exports = {removePublicDirectory, createPublicDirectory, readFile, getFilesToPrepare, createJsSiteMap};

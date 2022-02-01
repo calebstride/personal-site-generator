@@ -1,5 +1,6 @@
 const yaml = require('js-yaml');
 const fmh = require('./fileManagerHelper.js');
+const smc = require('./siteMapCreator.js');
 
 function renderFiles(path) {
 	const files = fmh.getFilesToPrepare(path);
@@ -13,11 +14,13 @@ function renderFiles(path) {
 	files.forEach((file) => {
 		renderFile(file, siteMap, defaultSettings);
 	});
+
+	fmh.createJsSiteMap(path, siteMap);
 }
 
 function renderFile(file, siteMap, defaultSettings) {
 	try {
-		if (file.includes('.md') || file.includes('ContentTools.js')) {
+		if (file.includes('.md')) {
 			let content = readFile(file).toString();
 			let newPage;
 
@@ -25,12 +28,11 @@ function renderFile(file, siteMap, defaultSettings) {
 				newPage = replaceMarkdownVariables(content, defaultSettings);
     			// Add the file to the site map object
     			file = file.replace('resources\\siteContent', 'public').replace('.md', '.html');
-				addFileToSiteMap(siteMap, file, pageName);
+				smc.addFileToSiteMap(siteMap, file, pageName);
 			} else {
-				newPage = content.replace('[SITEMAP]', JSON.stringify(siteMap));
 				file = file.replace('resources\\siteContent', 'public');
 			}
-		
+
 			fs.writeFileSync(file, newPage);
 		} else {
 			fs.copyFileSync(file, file.replace('resources\\siteContent', 'public'));
