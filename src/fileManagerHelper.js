@@ -21,7 +21,7 @@ function createPublicDirectory(path) {
 function readFile(filePath) {
 	try {
 		let file = fs.readFileSync(filePath, 'utf8');
-		console.log('Read the template file');
+		console.log('Read the ' + filePath + ' file');
 		return file;
 	} catch (err) {
 		console.error(err);
@@ -47,7 +47,7 @@ function readAndAddResource(directory, listOfResources) {
 
 			if (fs.lstatSync(wholeDirectory).isDirectory()) {
 				console.log('Reading directory: \\' + file);
-				fs.mkdirSync(wholeDirectory.replace('\\resources\\siteContent', 'public'));
+				fs.mkdirSync(wholeDirectory.replace('resources\\siteContent', 'public'));
 				readAndAddResource(wholeDirectory, listOfResources);
 			} else {
 				listOfResources.push(wholeDirectory);
@@ -60,9 +60,9 @@ function readAndAddResource(directory, listOfResources) {
 
 function createJsSiteMap(path, siteMap) {
 	try {
-		let content = "const siteMap = " + JSON.stringify(siteMap);
-		fs.writeFileSync(path + '\\public', content);
-	} catch (error) {
+		let content = "const siteMap = " + JSON.stringify(siteMap) + ';';
+		fs.writeFileSync(path + '\\public\\siteMap.js', content);
+	} catch (err) {
 		console.error(err);
 		return;
 	}

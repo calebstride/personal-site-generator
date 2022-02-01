@@ -60,9 +60,9 @@ class ContentTools {
         }
     }
 
-    // Get the map of webpages on the website
+    // Get the map of webpages on the website (held in siteMap.js)
     static getWebPagesMap() {
-        return [SITEMAP];
+        return siteMap;
     }
 
 
