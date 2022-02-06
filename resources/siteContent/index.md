@@ -1,3 +1,8 @@
+---
+title: Home
+header: Home
+---
+
 <style>
     #pageTitle {
         display : none;

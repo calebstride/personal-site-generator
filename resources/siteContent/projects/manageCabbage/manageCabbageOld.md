@@ -1,3 +1,7 @@
+---
+title: Previous Design
+header: Previous Design
+---
 ## Summary
 
 This is a brief summary about the project.

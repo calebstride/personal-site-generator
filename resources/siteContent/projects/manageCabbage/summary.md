@@ -1,3 +1,7 @@
+---
+title: Summary
+header: Summary
+---
 ## Summary
 
 Manage Cabbage is a spending management web application created by me (Caleb Stride). It's main purpose is to record spending and to give insights into where it's going.

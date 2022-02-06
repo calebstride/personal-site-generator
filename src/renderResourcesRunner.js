@@ -27,7 +27,7 @@ function renderFile(file, siteMap, defaultSettings) {
 			let newPage;
 
 			if (file.includes('.md')) {
-				let formattedObject = rfm.replaceMarkdownVariables(content, defaultSettings);
+				let formattedObject = rfm.replaceMarkdownVariables(content, defaultSettings.pageContent);
 				newPage = formattedObject.content;
 				file = file.replace('resources\\siteContent', 'public').replace('.md', '.html');
     			// Add the file to the site map object
