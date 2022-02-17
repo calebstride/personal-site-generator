@@ -3,7 +3,7 @@ html, body {
     margin: 0px;
     padding: 0px;
     position: relative;
-    height: auto;
+    height: 100%;
     min-height: 100%;
     font-family: Arial, Helvetica, sans-serif;
     color: black;
@@ -12,8 +12,6 @@ html, body {
 
 #sideBar {
     background-color: #808080;
-    margin: 0px;
-    z-index: 1000;
 }
 
 #sideBar ul {
@@ -107,24 +105,17 @@ html, body {
 
 @media screen and (min-width: 600px) {
 
-    #sideBar {
+    #pageContainer {
+        display: flex;
         height: 100%;
-        display: block;
-        position: fixed;
     }
 
-    #sideBar, #sideBarPush {
-        width: 180px;
-    }
-    
-    #sideBarPush {
-        height: 180px;
-        float: left;
+    #sideBar {
+        flex: 1;
     }
 
     #pageContent {
-        height: fit-content;
-        overflow: hidden;
+        flex: 4;
     }
 
     .hiddenFeatureBig {
