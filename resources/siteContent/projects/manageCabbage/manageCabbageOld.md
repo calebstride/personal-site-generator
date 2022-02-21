@@ -18,4 +18,6 @@ Intro stuff.
 ### Desgin type 3
 #### Issues with problem
 #### Non issues with problem
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> 
+
 ### Desgin type 4

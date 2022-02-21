@@ -22,7 +22,9 @@ class PageSummary {
             numbering[indexToUpdate]++;
             lastIndexUpdated = indexToUpdate;
             
-            menu.appendChild(this.createLinkForHeader(pageHeaders[i], numbering.filter(function(x){return x !== 0;})));
+            let numbersWithoutZero = this.removeZerosFromNumbers(numbering);
+            menu.appendChild(this.createLinkForHeader(pageHeaders[i], numbersWithoutZero));
+            pageHeaders[i].textContent = this.createNumberedHeader(pageHeaders[i].textContent, numbersWithoutZero);
         }
 
         appendArea.appendChild(menu);
@@ -31,7 +33,7 @@ class PageSummary {
     // Create a link for the header
     static createLinkForHeader(header, numbers) {
         let row = document.createElement("a");
-        row.textContent = numbers.join(".") + "\xa0\xa0\xa0" + header.textContent;
+        row.textContent = this.createNumberedHeader(header.textContent, numbers);
         row.classList.add("headerRow" + header.nodeName, "docMenuLink");
 
         if (header.id == false) {
@@ -41,4 +43,13 @@ class PageSummary {
         return row;
     }
 
+    // Create a title from the text header and numbered header
+    static createNumberedHeader(pageHeader, numbersWithoutZero) {
+        return numbersWithoutZero.join(".") + "." + "\xa0\xa0\xa0" + pageHeader;
+    }
+
+    // Remove zero values from the array
+    static removeZerosFromNumbers(numbers) {
+        return numbers.filter(function(x){return x !== 0;});
+    }
 }

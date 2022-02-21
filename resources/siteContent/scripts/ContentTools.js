@@ -69,7 +69,7 @@ class ContentTools {
     // Create the web page nav bar that's used on each page
     static createMainNavBar() {
         const placeArea = document.getElementById("pageContainer");
-        document.body.appendChild(this.createBurgerMenu());
+        document.body.insertBefore(this.createBurgerMenu(), document.body.firstChild);
 
         let menu = document.createElement("nav");
         menu.id = "sideBar";

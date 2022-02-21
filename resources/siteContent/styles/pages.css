@@ -35,15 +35,15 @@
     padding-bottom: 4%;
 }
 
-.headerRowH3 {
+.headerRowH3, h3 {
     padding-left: 30px;
 }
 
-.headerRowH4 {
+.headerRowH4, h4 {
     padding-left: 60px;
 }
 
-.headerRowH5 {
+.headerRowH5, h5 {
     padding-left: 90px;
 }
 
