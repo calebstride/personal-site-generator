@@ -1,6 +1,6 @@
 // Create reference instance
-const fmh = require('./src/fileManagerHelper.js');
-const rrr = require('./src/renderResourcesRunner.js');
+const fmh = require('./src/FileManagerHelper.js');
+const rrr = require('./src/RenderResourcesRunner.js');
 const path = process.cwd();
 
 fmh.removePublicDirectory(path);

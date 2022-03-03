@@ -47,7 +47,7 @@ function readAndAddResource(directory, listOfResources) {
 
 			if (fs.lstatSync(wholeDirectory).isDirectory()) {
 				console.log('Reading directory: \\' + file);
-				fs.mkdirSync(wholeDirectory.replace('resources\\siteContent', 'public'));
+				fs.mkdirSync(wholeDirectory.replace('resources\\siteContent', 'public').replace(/[0-9]+_/, ''));
 				readAndAddResource(wholeDirectory, listOfResources);
 			} else {
 				listOfResources.push(wholeDirectory);

@@ -16,4 +16,7 @@ Place all the files you want to turn into a website into the /resources/siteCont
 
     $ node renderResources.js
 
-Everything in resources/siteContent will be moved and rendered to the /public directory. 
+Everything in resources/siteContent will be moved and rendered to the /public directory.
+
+## **Notes**
+- You can **order the pages** that appear on the sidebar by starting the filename with 'xx_'. Where xx is a number.

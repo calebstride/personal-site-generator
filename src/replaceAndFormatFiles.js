@@ -1,6 +1,6 @@
 const marked = require('marked');
 const yaml = require('js-yaml');
-const fmh = require('./fileManagerHelper.js');
+const fmh = require('./FileManagerHelper.js');
 
 function replaceMarkdownVariables(content, defaultPageConfig) {
 	// Read in the yaml settings in each md file

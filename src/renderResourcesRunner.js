@@ -1,8 +1,8 @@
 const fs = require('fs');
 const yaml = require('js-yaml');
-const fmh = require('./fileManagerHelper.js');
-const smc = require('./siteMapCreator.js');
-const rfm = require('./replaceAndFormatFiles.js');
+const fmh = require('./FileManagerHelper.js');
+const smc = require('./SiteMapCreator.js');
+const rfm = require('./ReplaceAndFormatFiles.js');
 
 function renderFiles(path) {
 	const files = fmh.getFilesToPrepare(path);
@@ -29,7 +29,7 @@ function renderFile(file, siteMap, defaultSettings) {
 			if (file.includes('.md')) {
 				let formattedObject = rfm.replaceMarkdownVariables(content, defaultSettings.pageContent);
 				newPage = formattedObject.content;
-				file = file.replace('resources\\siteContent', 'public').replace('.md', '.html');
+				file = file.replace('resources\\siteContent', 'public').replace('.md', '.html').replace(/[0-9]+_/, '');
     			// Add the file to the site map object
 				smc.addFileToSiteMap(siteMap, file, formattedObject.name);
 			}
