@@ -1,3 +1,4 @@
+/* Create page size and make sure it fits the whole screen */
 html, body {
     width: 100%;
     margin: 0px;
@@ -51,6 +52,19 @@ body {
 
 .hiddenFeature {
     display: none;
+}
+  
+/* Create the caret/arrow with a unicode, and style it */
+.dropDownButton::before {
+    content: "\25B6";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.dropDownButton.selectedDD::before {
+    transform: rotate(90deg);
 }
 
 @media screen and (max-width: 600px) {
