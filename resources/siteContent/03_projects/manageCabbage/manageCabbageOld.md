@@ -4,7 +4,7 @@ header: Previous Design
 ---
 ## Summary
 
-This is a brief summary about the project.
+This page is about the initial version of ManageCabbage. It follows the processes and designing I went through from start to finish. Whilst hopefully picking out some interesting things I learnt along the way.
 
 
 <div id="docMenuArea"> </div>
