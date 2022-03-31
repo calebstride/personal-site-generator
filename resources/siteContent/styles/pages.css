@@ -35,16 +35,16 @@
     padding-bottom: 4%;
 }
 
-h3, h3 + p {
-    padding-left: 5px;
+h2, h3, h4, h5 {
+    margin-bottom: 0px;
 }
 
-h4, h4 + p {
-    padding-left: 10px;
+h2 + p, h3 + p, h4 + p, h5 + p {
+    margin-top: 5px;
 }
 
-h5, h5 + p {
-    padding-left: 15px;
+h3, h4 {
+    margin-top: 5px;
 }
 
 .headerRowH3 {
