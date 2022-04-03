@@ -98,6 +98,7 @@ class ContentTools {
             
             if (pageObject.children == undefined) {
                 let buttonContent = document.createElement("div");
+                buttonContent.appendChild(this.createDivForIcon());
                 buttonContent.appendChild(this.createLinkText(pageObject.name, pageObject.page));
                 menuButton.appendChild(buttonContent);
                 isExpand = this.setElementSelectedNav(menuButton, pageObject);
@@ -114,10 +115,9 @@ class ContentTools {
         let buttonDropdown = document.createElement("div");
         buttonDropdown.className = "dropDownButton";
         buttonDropdown.id = pageObject.name + 'DropDownB';
+        buttonDropdown.appendChild(this.createDivForIcon());
         buttonDropdown.appendChild(this.createLinkText(pageObject.name, pageObject.page));
-        if (pageObject.page.length === 0) {
-            buttonDropdown.onclick = function() {ContentTools.hideOrShowNavBar(this, (pageObject.name + 'DropDown'));};
-        }
+        buttonDropdown.onclick = function() {ContentTools.hideOrShowNavBar(this, (pageObject.name + 'DropDown'));};
         menuButton.appendChild(buttonDropdown);
         let isExpand = this.setElementSelectedNav(buttonDropdown, pageObject);
 
@@ -153,6 +153,13 @@ class ContentTools {
         }
         linkTag.textContent = linkText;
         return linkTag;
+    }
+
+    //Create an empty span for placing an icon
+    static createDivForIcon() {
+        let dropDownIcon = document.createElement('div');
+        dropDownIcon.className = 'dropDownIcon';
+        return dropDownIcon;
     }
 
     // Creates the close button used on the mobile menu

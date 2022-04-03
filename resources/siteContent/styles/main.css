@@ -30,7 +30,7 @@ body {
 }
 
 #sideBar a {
-    display: block;
+    display: inline-block;
     text-decoration: none;
     color: inherit;
     padding: 10px 10px 8px 10px;
@@ -55,16 +55,22 @@ body {
 }
   
 /* Create the caret/arrow with a unicode, and style it */
-.dropDownButton::before {
+.dropDownButton .dropDownIcon::before {
     content: "\25B6";
     color: black;
     display: inline-block;
     margin-right: 6px;
+    margin-left: 6px;
 }
 
 /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
-.dropDownButton.selectedDD::before {
+.dropDownButton.selectedDD .dropDownIcon::before {
     transform: rotate(90deg);
+}
+
+#sideBar .dropDownIcon {
+    display: inline-block;
+    width: 20px;
 }
 
 @media screen and (max-width: 600px) {
