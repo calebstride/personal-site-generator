@@ -152,6 +152,8 @@ class ContentTools {
             linkTag.href = link;
         }
         linkTag.textContent = linkText;
+        // If the link is clicked don't call any parent events
+        linkTag.onclick = function(e) {e.stopPropagation();};
         return linkTag;
     }
 
