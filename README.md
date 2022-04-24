@@ -6,7 +6,7 @@ Most of the work done in this repo was around creating and rendering the pages r
 I'll take this as a learning experience on doing proper research before starting a project. Plus not all my time was wasted as I got to practice my development/research skills.
 
 ## **Requirements**
-This requires [node.js](https://nodejs.org/en/download/) and the [markedjs marked](https://github.com/markedjs/marked) package to compile the markdown into html. It also requires a web space for the html files to be hosted.
+This requires [node.js](https://nodejs.org/en/download/) and the given npm packages to compile the markdown into html. It also requires a web space for the html files to be hosted.
 
 ## **Setup**
 
@@ -17,6 +17,14 @@ Place all the files you want to turn into a website into the /resources/siteCont
     $ node renderResources.js
 
 Everything in resources/siteContent will be moved and rendered to the /public directory.
+
+## **Input args**
+The following arguments can be used to specify how the script is run. You can also use -h to print the possible arguments:
+
+- [-h] Runs the help command
+- [-v] Prints the version
+- [-c] Specify the directory of the pre-rendered website content
+- [-o] Specifies the output directory for the rendered website
 
 ## **Notes**
 - You can **order the pages** that appear on the sidebar by starting the filename with 'xx_'. Where xx is a number.

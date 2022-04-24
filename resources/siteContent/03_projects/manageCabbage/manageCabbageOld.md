@@ -18,17 +18,17 @@ To start I briefly designed how the website would function and the technologies 
 ### Backend
 At the time of starting this project the only programming language I knew how to use as a backend was php so that's what I went with.
 
-I did a bit of googling for a php hosting platform (there a tonnes apparently) and ended up going with hostgator as it was reasonably low cost and provided what I needed.
+I did a bit of googling for a php hosting platform (there are tonnes apparently) and ended up going with hostgator as it was reasonably low cost and provided what I needed.
 
 The choice of the hosting platform meant I was stuck with mysql as a database. But luckily it was the one I'd worked with before when using php.
 
 ### Frontend
-There isn't really much of a choice for frontend technologies for a website as it's mainly just html and Javascript. 
+There isn't really much of a choice for frontend technologies for a website as it's mainly just html and JavaScript. 
 
-I decided to not use any of the big Javascript libraries (e.g. JQuery or Prototype) or different flavours of Javascript (e.g. CoffeeScript, TypeScript). The reason being I wanted to try and learn the fundamentals and how it worked rather than just learning a specific way to use it. My final thought on this can be found [here](#javascript).
+I decided to not use any of the big JavaScript libraries (e.g. JQuery or Prototype) or different flavours of JavaScript (e.g. CoffeeScript, TypeScript). The reason being I wanted to try and learn the fundamentals and how it worked rather than just learning a specific way to use it. My final thought on this can be found [here](#javascript).
 
-## Testing :0
-Hi there test
+## Testing
+Admittedly this is an area that I could have improved a lot on. I
 
 ## Key Points Learned
 ### Javascript

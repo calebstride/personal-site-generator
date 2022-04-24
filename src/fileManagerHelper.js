@@ -1,18 +1,18 @@
 const fs = require('fs');
 
-function removePublicDirectory(path) {
+function removeOutputDirectory(path) {
     try {
-	    fs.rmSync(path + '\\public', { recursive: true, force: true });
-	    console.log('Cleared public directory');
+	    fs.rmSync(path, { recursive: true, force: true });
+	    console.log('Cleared output directory (' + path + ')');
     } catch (err) {
         console.error(err);
     }
 }
 
-function createPublicDirectory(path) {
+function createOutputDirectory(path) {
     try {
-        fs.mkdirSync(path + '\\public');
-        console.log('Created public directory');
+        fs.mkdirSync(path);
+        console.log('Created output directory (' + path + ')');
     } catch (err) {
         console.error(err);
     } 
@@ -21,7 +21,7 @@ function createPublicDirectory(path) {
 function readFile(filePath) {
 	try {
 		let file = fs.readFileSync(filePath, 'utf8');
-		console.log('Read the ' + filePath + ' file');
+		console.log('Reading the file: ' + filePath);
 		return file;
 	} catch (err) {
 		console.error(err);
@@ -29,29 +29,29 @@ function readFile(filePath) {
 	}
 }
 
-// Used to get the files that need formatting
-function getFilesToPrepare(path) {
-	const directory = path + '\\resources\\siteContent';
-	let filesToCompile = [];
-	readAndAddResource(directory, filesToCompile);
-	return filesToCompile;
-};
+function getFilesToPrepare(contentDir) {
+	let listOfFiles = [];
+	getFilesAndDirsToPrepare(contentDir, listOfFiles);
+	return listOfFiles;
+}
 
-// Reads the directories recursively to add files for formatting
-function readAndAddResource(directory, listOfResources) {
+// Finds all files and returns them also reads the directories recursively 
+// and creates them in ouput area.
+function getFilesAndDirsToPrepare(contentDir, listOfResources) {
 	try {
-		let files = fs.readdirSync(directory);
+		let files = fs.readdirSync(contentDir);
 
 		files.forEach((file) => {
-			let wholeDirectory = directory + '\\' + file;
+			let wholeDirectory = contentDir + '\\' + file;
 
 			if (fs.lstatSync(wholeDirectory).isDirectory()) {
 				console.log('Reading directory: \\' + file);
-				fs.mkdirSync(wholeDirectory.replace('resources\\siteContent', 'public').replaceAll(/([0-9]+_)/g, ''));
-				readAndAddResource(wholeDirectory, listOfResources);
+				listOfResources.push(wholeDirectory);
+				getFilesAndDirsToPrepare(wholeDirectory, listOfResources);
 			} else {
 				listOfResources.push(wholeDirectory);
 			}
+			
 		});
 	} catch (err) {
 		console.error(err);
@@ -61,7 +61,7 @@ function readAndAddResource(directory, listOfResources) {
 function createJsSiteMap(path, siteMap) {
 	try {
 		let content = "const siteMap = " + JSON.stringify(siteMap) + ';';
-		fs.writeFileSync(path + '\\public\\siteMap.js', content);
+		fs.writeFileSync(path + '\\siteMap.js', content);
 	} catch (err) {
 		console.error(err);
 		return;
@@ -69,4 +69,4 @@ function createJsSiteMap(path, siteMap) {
 	
 }
 
-module.exports = {removePublicDirectory, createPublicDirectory, readFile, getFilesToPrepare, createJsSiteMap};
+module.exports = {removeOutputDirectory, createOutputDirectory, readFile, getFilesToPrepare, createJsSiteMap};
