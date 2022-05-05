@@ -18,7 +18,7 @@ To start I briefly designed how the website would function and the technologies 
 ### Backend
 At the time of starting this project the only programming language I knew how to use as a backend was php so that's what I went with.
 
-I did a bit of googling for a php hosting platform (there are tonnes apparently) and ended up going with hostgator as it was reasonably low cost and provided what I needed.
+I did a bit of googling for a php hosting platform (there are tonnes apparently) and ended up going with hostgator as it was reasonably low cost and provided what I needed. Although I wouldn't choose this again as it was hosted in America (should've checked that before buying it lol).
 
 The choice of the hosting platform meant I was stuck with mysql as a database. But luckily it was the one I'd worked with before when using php.
 
@@ -28,10 +28,20 @@ There isn't really much of a choice for frontend technologies for a website as i
 I decided to not use any of the big JavaScript libraries (e.g. JQuery or Prototype) or different flavours of JavaScript (e.g. CoffeeScript, TypeScript). The reason being I wanted to try and learn the fundamentals and how it worked rather than just learning a specific way to use it. My final thought on this can be found [here](#javascript).
 
 ## Testing
-Admittedly this is an area that I could have improved a lot on. I
+Admittedly this is an area that I could have improved a lot on. I didn't look into any testing frameworks for php so my the code for this has absolutely no tests :(. The same goes with the JavaScript in the project.
+
+Instead I just did manual testing. Luckily the system isn't that big and I was only adding small features so the manual testing didn't take very long.
+
+I think even though this was a smaller project I should have added tests. This would have allowed me to find some issues earlier, before I deployed the changes. As well as picking up some smaller issues that passed through the gaps in my testing. The downside to this would be that I'd probably have spent more time writing tests than the actual code.
 
 ## Key Points Learned
+### Size of Application
+
+### Testing
+
+### Code Design
+In addition to testing this is an area I should have paid more attention to.
 ### Javascript
-#### Some header 4
+#### Stick to something
 ## Updating
 ### Remember me functionality

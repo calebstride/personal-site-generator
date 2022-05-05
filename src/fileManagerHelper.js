@@ -36,7 +36,7 @@ function getFilesToPrepare(contentDir) {
 }
 
 // Finds all files and returns them also reads the directories recursively 
-// and creates them in ouput area.
+// and creates them in output area.
 function getFilesAndDirsToPrepare(contentDir, listOfResources) {
 	try {
 		let files = fs.readdirSync(contentDir);
