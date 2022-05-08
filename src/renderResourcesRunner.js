@@ -31,7 +31,7 @@ function renderFile(file, siteMap, defaultSettings, contentDir, outputDir) {
 				newPage = formattedObject.content;
 				file = changeFileNameToOutput(file, contentDir, outputDir).replace('.md', '.html');
     			// Add the file to the site map object
-				smc.addFileToSiteMap(siteMap, file, formattedObject.name);
+				smc.addFileToSiteMap(siteMap, file, formattedObject.name, outputDir);
 			}
 			fs.writeFileSync(file, newPage);
 			

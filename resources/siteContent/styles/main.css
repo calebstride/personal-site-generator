@@ -63,6 +63,13 @@ body {
     margin-left: 6px;
 }
 
+.dropDownIcon::before {
+    content: "\2022";
+    display: inline-block;
+    margin-right: 6px;
+    margin-left: 10px;
+}
+
 /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
 .dropDownButton.selectedDD .dropDownIcon::before {
     transform: rotate(90deg);

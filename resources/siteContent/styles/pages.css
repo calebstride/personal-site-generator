@@ -31,8 +31,11 @@
 
 #docMenuArea {
     padding-left: 10%;
-    padding-top: 4%;
-    padding-bottom: 4%;
+}
+
+img {
+    margin: auto;
+    display: block;
 }
 
 h2, h3, h4, h5 {
