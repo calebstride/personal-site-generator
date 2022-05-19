@@ -6,6 +6,8 @@ class PageSummary {
         if (appendArea == null) {
             return;
         }
+        let useNumbering = appendArea.classList.contains("numbered"); // Add numbering for headers
+        let useNumberingMenu = appendArea.classList.contains("numberedMenu"); // Add numbering for headers
 
         const pageHeaderTypes = ["H2", "H3", "H4", "H5"];
         const pageHeaders = document.querySelectorAll("h2, h3, h4, h5");
@@ -23,17 +25,17 @@ class PageSummary {
             lastIndexUpdated = indexToUpdate;
             
             let numbersWithoutZero = this.removeZerosFromNumbers(numbering);
-            menu.appendChild(this.createLinkForHeader(pageHeaders[i], numbersWithoutZero));
-            pageHeaders[i].textContent = this.createNumberedHeader(pageHeaders[i].textContent, numbersWithoutZero);
+            menu.appendChild(this.createLinkForHeader(pageHeaders[i], numbersWithoutZero, (useNumberingMenu || useNumbering)));
+            pageHeaders[i].textContent = this.createNumberedHeader(pageHeaders[i].textContent, numbersWithoutZero, useNumbering);
         }
 
         appendArea.appendChild(menu);
     } 
 
     // Create a link for the header
-    static createLinkForHeader(header, numbers) {
+    static createLinkForHeader(header, numbers, useNumbering) {
         let row = document.createElement("a");
-        row.textContent = this.createNumberedHeader(header.textContent, numbers);
+        row.textContent = this.createNumberedHeader(header.textContent, numbers, useNumbering);
         row.classList.add("headerRow" + header.nodeName, "docMenuLink");
 
         if (header.id == false) {
@@ -44,8 +46,8 @@ class PageSummary {
     }
 
     // Create a title from the text header and numbered header
-    static createNumberedHeader(pageHeader, numbersWithoutZero) {
-        return numbersWithoutZero.join(".") + "." + "\xa0\xa0\xa0" + pageHeader;
+    static createNumberedHeader(pageHeader, numbersWithoutZero, useNumbering) {
+        return useNumbering ? numbersWithoutZero.join(".") + "." + "\xa0\xa0\xa0" + pageHeader : pageHeader;
     }
 
     // Remove zero values from the array
