@@ -61,8 +61,12 @@ I think the frontend is ok but it definitely needs some work. I think the main p
 ## Updating
 The following are just some things I implemented that stood out as interesting.
 ### Remember me functionality
+I found [this blog page](https://paragonie.com/blog/2015/04/secure-authentication-php-with-long-term-persistence) about implementing remember me functionality within php. It gave me a good idea about how to implement the functionality but it also helped make me aware of some potential security issues I hadn't thought of before. 
+
+An example was timing attacks. In the example it describes how searching up credentials in a database may indicate how correct the guess is. Say for example you needed to lookup if a given string exists. A closer match would take longer to reject as it checks more characters before finding out the value is incorrect, whereas, if the first character is wrong it would return false almost instantly.
 ### Monthly Payments
+Not too long after using the website I realised that some things would become tedious when logging manually. One of these would be payments that occur on a monthly basis like bills etc. So to solve this I added a new entity that could be used to produce transactions on a monthly basis. This entity contains pretty much the same information as a transaction only it also contains the date at which it should be added. I made a daily cron job that would pick up these monthly transactions and create normal transactions from them if the payment day was the current day.
 
-
+I also added an option so you could manually create a transaction from these monthly transactions. The date of the monthly transaction could also be removed meaning it would never be automatically added as a transaction. This was pretty useful if you had a frequent payment that had inconsistent timing as you only need to press one button instead of filling out all the transaction's information. 
 
 ## Examples
