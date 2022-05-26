@@ -152,8 +152,12 @@ class ContentTools {
             linkTag.href = link;
         }
         linkTag.textContent = linkText;
-        // If the link is clicked don't call any parent events
-        linkTag.onclick = function(e) {e.stopPropagation();};
+        // If the link is clicked don't call any parent events unless menu is opened
+        linkTag.onclick = function(e) {
+            if (window.sessionStorage.getItem(linkText) == "true") {
+                e.stopPropagation();
+            }
+        };
         return linkTag;
     }
 

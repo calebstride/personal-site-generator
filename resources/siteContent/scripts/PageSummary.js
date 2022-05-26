@@ -6,8 +6,8 @@ class PageSummary {
         if (appendArea == null) {
             return;
         }
-        let useNumbering = appendArea.classList.contains("numbered"); // Add numbering for headers
-        let useNumberingMenu = appendArea.classList.contains("numberedMenu"); // Add numbering for headers
+        let useNumbering = appendArea.classList.contains("numbered"); // Add numbering for headers and menu
+        let useNumberingMenu = appendArea.classList.contains("numberedMenu"); // Add numbering for menu only
 
         const pageHeaderTypes = ["H2", "H3", "H4", "H5"];
         const pageHeaders = document.querySelectorAll("h2, h3, h4, h5");
