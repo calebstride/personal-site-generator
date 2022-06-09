@@ -4,13 +4,7 @@ const fmh = require('./FileManagerHelper.js');
 
 function replaceMarkdownVariables(content, defaultPageConfig) {
 	// Read in the yaml settings in each md file
-	let finalPageConfig;
-	// TODO potentially set some smarter defaults e.g. page title and name are file name
-	// Somehow order files - add number in name then remove when doing above and when moving/creating file. 
-	// Or add conf property to set order. Will need to change the sitemap as this controls order. 
-	
-	// So two options. Change file system order or change sitemap order
-	 
+	let finalPageConfig; 
 	if (content.indexOf('---') === content.lastIndexOf('---') || content.lastIndexOf('---') === -1) {
 		console.error('There is an issue reading the conf in this file');
 		finalPageConfig = defaultPageConfig;
