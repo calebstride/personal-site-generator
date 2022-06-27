@@ -5,8 +5,8 @@ html, body {
     padding: 0px;
     height: 100%;
     font-family: Arial, Helvetica, sans-serif;
-    color: black;
-    background-color: #d2d2d2;
+    color: #444;
+    background-color: #fafafa;
 }
 
 body {
@@ -14,7 +14,7 @@ body {
 }
 
 #sideBar {
-    background-color: #808080;
+    background-color: #d2d2d2;
 }
 
 #sideBar ul {
@@ -23,8 +23,8 @@ body {
 }
 
 #sideBar #mainNavBar > li > div:hover, .dropDownContent div:hover {
-    background-color: #333333;
-    color: #d2d2d2;
+    background-color: #444;
+    color: #fafafa;
 }
 
 #sideBar a {
@@ -41,8 +41,8 @@ body {
 }
 
 .selected {
-    background-color: #333333;
-    color: #d2d2d2;
+    background-color: #444;
+    color: #fafafa;
 }
 
 .hiddenFeature {
@@ -82,7 +82,7 @@ body {
         position: absolute;
         padding-right: 10px;
         font-size: 50px;
-        color: #333333;
+        color: #444;
         display: inline-block;
         line-height: 25px;
     }
@@ -100,12 +100,12 @@ body {
     .b_men {
         width: 35px;
         height: 5px;
-        background-color: #333333;
+        background-color: #444;
         margin: 6px 0;
     }
 
     #burgerHug {
-        background-color: #808080;
+        background-color: #d2d2d2;
         overflow: auto;
     }
 
