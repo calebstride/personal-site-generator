@@ -145,6 +145,12 @@ body {
         flex: 5;
     }
 
+    #pageRightHand {
+        flex: 1;
+        background-color: #d2d2d2;
+    }
+
+
     .hiddenFeatureBig {
         display: none;
     }
