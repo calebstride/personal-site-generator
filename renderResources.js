@@ -20,8 +20,8 @@ parser.add_argument("-c", "--content", {
 
 const arguments = parser.parse_args();
 
-let outputDir = arguments.output == undefined ? path + "\\public" : arguments.output;
-let contentDir = arguments.content == undefined ? path + "\\resources\\siteContent" : arguments.output;
+let outputDir = arguments.output === undefined ? path + "\\public" : arguments.output;
+let contentDir = arguments.content === undefined ? path + "\\resources\\siteContent" : arguments.output;
 
 // Now runs the generation of the website from resources
 fmh.removeOutputDirectory(outputDir);

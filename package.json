@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/CalebStride/personal-site#readme",
   "dependencies": {
-    "marked": "~4",
-    "js-yaml": "~4"
+    "argparse": "^2.0.1",
+    "js-yaml": "~4",
+    "marked": "~4"
   }
 }
