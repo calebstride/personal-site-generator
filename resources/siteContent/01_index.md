@@ -1,16 +1,6 @@
 ---
-title: Home
-header: Home
+title: Example
+header: Example
 ---
 
-<style>
-    #pageTitle {
-        display : none;
-    }
-</style>
-
-<div id="siteGreeting">
-    <div>Hello</div>
-    <div>And</div>
-    <div>Welcome</div>
-</div>
+# Example File

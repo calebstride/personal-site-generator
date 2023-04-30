@@ -1,56 +1,54 @@
-const fs = require('fs');
-const yaml = require('js-yaml');
-const fmh = require('./FileManagerHelper.js');
-const smc = require('./SiteMapCreator.js');
-const rfm = require('./ReplaceAndFormatFiles.js');
+import {load} from 'js-yaml';
+import * as fmh from './FileManagerHelper.js';
+import * as fs from 'fs';
+import {addFileToSiteMap} from './siteMapCreator.js';
+import * as rfm from './ReplaceAndFormatFiles.js';
 
-function renderFiles(path, outputDir, contentDir) {
-	let files = fmh.getFilesToPrepare(contentDir);
-	console.log('Moving and formatting the following files and folders:');
-	console.log(files);
+export function renderFiles(path, outputDir, resourceDir) {
+    let files = fmh.getFilesToPrepare(resourceDir + '\\siteContent');
+    console.log('Moving and formatting the following files and folders:');
+    console.log(files);
 
-	let defaultSettings = yaml.load(fmh.readFile(path + '\\resources\\conf.yml'));
-	let siteMap = [];
+    let defaultSettings = load(fmh.readFile(resourceDir + '\\conf.yml'));
+    let siteMap = [];
 
-	// Read the files and put the rendered ones into output directory
-	files.forEach((file) => {
-		renderFile(file, siteMap, defaultSettings, contentDir, outputDir);
-	});
+    // Read the files and put the rendered ones into output directory
+    files.forEach((file) => {
+        renderFile(file, siteMap, defaultSettings, resourceDir, outputDir);
+    });
 
-	fmh.createJsSiteMap(outputDir, siteMap);
+    fmh.createJsSiteMap(outputDir, siteMap);
 }
 
-function renderFile(file, siteMap, defaultSettings, contentDir, outputDir) {
-	try {
-		if (file.includes('.md')) {
-			let content = fmh.readFile(file).toString();
-			let newPage;
+function renderFile(file, siteMap, defaultSettings, resourceDir, outputDir) {
+    const contentDir = resourceDir + '\\siteContent';
+    try {
+        if (file.includes('.md')) {
+            let content = fmh.readFile(file).toString();
+            let newPage;
 
-			if (file.includes('.md')) {
-				let formattedObject = rfm.replaceMarkdownVariables(content, defaultSettings.pageContent);
-				newPage = formattedObject.content;
-				file = changeFileNameToOutput(file, contentDir, outputDir).replace('.md', '.html');
-    			// Add the file to the site map object
-				smc.addFileToSiteMap(siteMap, file, formattedObject.name, outputDir);
-			}
-			fs.writeFileSync(file, newPage);
-			
-		} else {
-			if (fs.lstatSync(file).isDirectory()) {
-				fs.mkdirSync(changeFileNameToOutput(file, contentDir, outputDir));
-			} else {
-				fs.copyFileSync(file, changeFileNameToOutput(file, contentDir, outputDir));
-			}
-		}
-		console.log('Finished writing the new file: ' + file);
-	} catch (err) {
-		console.error(err);
-		return;
-	}
+            if (file.includes('.md')) {
+                let formattedObject = rfm.replaceMarkdownVariables(content, defaultSettings.pageContent, resourceDir);
+                newPage = formattedObject.content;
+                file = changeFileNameToOutput(file, contentDir, outputDir).replace('.md', '.html');
+                // Add the file to the site map object
+                addFileToSiteMap(siteMap, file, formattedObject.name, outputDir);
+            }
+            fs.writeFileSync(file, newPage);
+
+        } else {
+            if (fs.lstatSync(file).isDirectory()) {
+                fs.mkdirSync(changeFileNameToOutput(file, contentDir, outputDir));
+            } else {
+                fs.copyFileSync(file, changeFileNameToOutput(file, contentDir, outputDir));
+            }
+        }
+        console.log('Finished writing the new file: ' + file);
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 function changeFileNameToOutput(fileName, contentDir, outputDir) {
-	return fileName.replace(contentDir, outputDir).replaceAll(/[0-9]+_/g, '');
+    return fileName.replace(contentDir, outputDir).replaceAll(/[0-9]+_/g, '');
 }
-
-module.exports = {renderFiles};

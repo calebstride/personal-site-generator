@@ -23,7 +23,7 @@ The following arguments can be used to specify how the script is run. You can al
 
 - [-h] Runs the help command
 - [-v] Prints the version
-- [-c] Specify the directory of the pre-rendered website content
+- [-r] Specify the directory of the pre-rendered website resources
 - [-o] Specifies the output directory for the rendered website
 
 ## **Notes**

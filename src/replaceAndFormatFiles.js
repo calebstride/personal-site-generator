@@ -1,8 +1,7 @@
-const marked = require('marked');
-const yaml = require('js-yaml');
-const fmh = require('./FileManagerHelper.js');
-
-function replaceMarkdownVariables(content, defaultPageConfig) {
+import * as marked from 'marked';
+import {load} from 'js-yaml';
+import * as fmh from './FileManagerHelper.js';
+export function replaceMarkdownVariables(content, defaultPageConfig, resourceDir) {
 	// Read in the yaml settings in each md file
 	let finalPageConfig; 
 	if (content.indexOf('---') === content.lastIndexOf('---') || content.lastIndexOf('---') === -1) {
@@ -11,11 +10,11 @@ function replaceMarkdownVariables(content, defaultPageConfig) {
 		finalPageConfig.content = marked.parse(content);
 	} else {
 		let fileConf = content.substring(content.indexOf('---') + 3, content.lastIndexOf('---'));
-		finalPageConfig = mergeConfObjects(defaultPageConfig, yaml.load(fileConf));
+		finalPageConfig = mergeConfObjects(defaultPageConfig, load(fileConf));
 		finalPageConfig.content = marked.parse(content.substring(content.lastIndexOf('---') + 3));
 	}
 	
-	const layoutLocation = process.cwd() + '\\resources\\templates\\' + finalPageConfig.layout;
+	const layoutLocation = resourceDir + '\\templates\\' + finalPageConfig.layout;
 	return {'content' : replaceVariables(fmh.readFile(layoutLocation).toString(), finalPageConfig), 'name' : finalPageConfig.title};
 }
 
@@ -24,7 +23,7 @@ function mergeConfObjects(defaultConf, pageConf) {
 	let defaultKeys = Object.keys(defaultConf);
 	let finalConf = {};
 	defaultKeys.forEach((element) => {
-		if (pageConf[element] == undefined) {
+		if (pageConf[element] === undefined) {
 			finalConf[element] = defaultConf[element];
 		} else {
 			finalConf[element] = pageConf[element];
@@ -41,5 +40,3 @@ function replaceVariables(template, pageConfig) {
 	});
 	return template;
 }
-
-module.exports = { replaceMarkdownVariables };

@@ -1,6 +1,6 @@
-const fs = require('fs');
+import * as fs from 'fs';
 
-function removeOutputDirectory(path) {
+export function removeOutputDirectory(path) {
     try {
 	    fs.rmSync(path, { recursive: true, force: true });
 	    console.log('Cleared output directory (' + path + ')');
@@ -9,7 +9,7 @@ function removeOutputDirectory(path) {
     }
 }
 
-function createOutputDirectory(path) {
+export function createOutputDirectory(path) {
     try {
         fs.mkdirSync(path);
         console.log('Created output directory (' + path + ')');
@@ -18,18 +18,17 @@ function createOutputDirectory(path) {
     } 
 }
 
-function readFile(filePath) {
+export function readFile(filePath) {
 	try {
 		let file = fs.readFileSync(filePath, 'utf8');
 		console.log('Reading the file: ' + filePath);
 		return file;
 	} catch (err) {
 		console.error(err);
-		return;
 	}
 }
 
-function getFilesToPrepare(contentDir) {
+export function getFilesToPrepare(contentDir) {
 	let listOfFiles = [];
 	getFilesAndDirsToPrepare(contentDir, listOfFiles);
 	return listOfFiles;
@@ -56,17 +55,13 @@ function getFilesAndDirsToPrepare(contentDir, listOfResources) {
 	} catch (err) {
 		console.error(err);
 	}
-};
+}
 
-function createJsSiteMap(path, siteMap) {
+export function createJsSiteMap(path, siteMap) {
 	try {
 		let content = "const siteMap = " + JSON.stringify(siteMap) + ';';
 		fs.writeFileSync(path + '\\siteMap.js', content);
 	} catch (err) {
 		console.error(err);
-		return;
 	}
-	
 }
-
-module.exports = {removeOutputDirectory, createOutputDirectory, readFile, getFilesToPrepare, createJsSiteMap};

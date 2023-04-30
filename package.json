@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "description": "Compiles the site ready for deployment",
   "main": "renderResources.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

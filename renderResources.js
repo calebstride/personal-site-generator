@@ -1,32 +1,32 @@
-// Create reference instance
-const fmh = require("./src/FileManagerHelper.js");
-const rrr = require("./src/RenderResourcesRunner.js");
-const { version } = require("./package.json");
-const { ArgumentParser } = require("argparse");
+import * as fmh from './src/FileManagerHelper.js';
+import {renderFiles} from './src/RenderResourcesRunner.js';
+import {ArgumentParser} from 'argparse';
+
+
 const path = process.cwd();
 
 // Following handles input params
 const parser = new ArgumentParser({
-    description: "Arguments for generating website content",
+    description: 'Arguments for generating website content'
 });
 
-parser.add_argument("-v", "--version", { action: "version", version });
-parser.add_argument("-o", "--output", {
-    help: "The directory that the generated files should be placed. Is /public by default",
+parser.add_argument('-v', '--version', {action: 'version', version : process.env.npm_package_version});
+parser.add_argument('-o', '--output', {
+    help: 'The directory that the generated files should be placed. Is /public by default'
 });
-parser.add_argument("-c", "--content", {
-    help: "The directory that contains the content of the website. Default is /resources/siteContent",
+parser.add_argument('-r', '--resources', {
+    help: 'The directory that contains the resources for generating the website. Default is /resources'
 });
 
-const arguments = parser.parse_args();
+let parsedArgs = parser.parse_args();
 
-let outputDir = arguments.output === undefined ? path + "\\public" : arguments.output;
-let contentDir = arguments.content === undefined ? path + "\\resources\\siteContent" : arguments.output;
+let outputDir = parsedArgs.output === undefined ? path + '\\public' : parsedArgs.output;
+let resourceDir = parsedArgs.content === undefined ? path + '\\resources' : parsedArgs.output;
 
 // Now runs the generation of the website from resources
 fmh.removeOutputDirectory(outputDir);
 fmh.createOutputDirectory(outputDir);
 
-rrr.renderFiles(path, outputDir, contentDir);
+renderFiles(path, outputDir, resourceDir);
 
-console.log("Finished compiling the files.");
+console.log('Finished compiling the files.');
