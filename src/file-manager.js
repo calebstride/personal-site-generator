@@ -1,8 +1,8 @@
 import {load} from 'js-yaml';
-import * as fmh from './FileManagerHelper.js';
+import * as fmh from './file-helper.js';
 import * as fs from 'fs';
-import {addFileToSiteMap} from './siteMapCreator.js';
-import * as rfm from './ReplaceAndFormatFiles.js';
+import {addFileToSiteMap} from './site-map-creator.js';
+import * as rfm from './file-formatter.js';
 
 export function renderFiles(path, outputDir, resourceDir) {
     let files = fmh.getFilesToPrepare(resourceDir + '\\siteContent');
@@ -25,16 +25,12 @@ function renderFile(file, siteMap, defaultSettings, resourceDir, outputDir) {
     try {
         if (file.includes('.md')) {
             let content = fmh.readFile(file).toString();
-            let newPage;
+            let formattedObject = rfm.replaceMarkdownVariables(content, defaultSettings.pageContent, resourceDir);
+            file = changeFileNameToOutput(file, contentDir, outputDir).replace('.md', '.html');
+            // Add the file to the site map object
+            addFileToSiteMap(siteMap, file, formattedObject.name, outputDir);
 
-            if (file.includes('.md')) {
-                let formattedObject = rfm.replaceMarkdownVariables(content, defaultSettings.pageContent, resourceDir);
-                newPage = formattedObject.content;
-                file = changeFileNameToOutput(file, contentDir, outputDir).replace('.md', '.html');
-                // Add the file to the site map object
-                addFileToSiteMap(siteMap, file, formattedObject.name, outputDir);
-            }
-            fs.writeFileSync(file, newPage);
+            fs.writeFileSync(file, formattedObject.content);
 
         } else {
             if (fs.lstatSync(file).isDirectory()) {

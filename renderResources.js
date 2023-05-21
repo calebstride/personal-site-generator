@@ -1,5 +1,5 @@
-import * as fmh from './src/FileManagerHelper.js';
-import {renderFiles} from './src/RenderResourcesRunner.js';
+import * as fmh from './src/file-helper.js';
+import {renderFiles} from './src/file-manager.js';
 import {ArgumentParser} from 'argparse';
 
 
@@ -10,7 +10,7 @@ const parser = new ArgumentParser({
     description: 'Arguments for generating website content'
 });
 
-parser.add_argument('-v', '--version', {action: 'version', version : process.env.npm_package_version});
+parser.add_argument('-v', '--version', {action: 'version', version: process.env.npm_package_version});
 parser.add_argument('-o', '--output', {
     help: 'The directory that the generated files should be placed. Is /public by default'
 });
