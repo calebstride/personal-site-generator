@@ -1,7 +1,6 @@
 import * as marked from 'marked';
 import {load} from 'js-yaml';
 import * as fmh from './file-helper.js';
-import {runHtmlEdit} from './htmlEdit/html-edit-runner.js';
 
 
 export function replaceMarkdownVariables(content, defaultPageConfig, resourceDir) {
@@ -16,11 +15,11 @@ export function replaceMarkdownVariables(content, defaultPageConfig, resourceDir
         finalPageConfig = mergeConfObjects(defaultPageConfig, load(fileConf));
         finalPageConfig.content = marked.parse(content.substring(content.lastIndexOf('---') + 3));
     }
-    finalPageConfig.content = runHtmlEdit(finalPageConfig.content);
-
     const layoutLocation = resourceDir + '\\templates\\' + finalPageConfig.layout;
+    const pageInTemplate = replaceVariables(fmh.readFile(layoutLocation).toString(), finalPageConfig);
+
     return {
-        'content': replaceVariables(fmh.readFile(layoutLocation).toString(), finalPageConfig),
+        'content': pageInTemplate,
         'name': finalPageConfig.title
     };
 }

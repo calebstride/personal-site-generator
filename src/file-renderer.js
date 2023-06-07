@@ -3,6 +3,7 @@ import * as fmh from './file-helper.js';
 import * as fs from 'fs';
 import {addFileToSiteMap} from './site-map-creator.js';
 import * as rfm from './file-formatter.js';
+import {runHtmlEdit} from './htmlEdit/html-edit-runner.js';
 
 export function renderFiles(path, outputDir, resourceDir) {
     let files = fmh.getFilesToPrepare(resourceDir + '\\siteContent');
@@ -18,6 +19,7 @@ export function renderFiles(path, outputDir, resourceDir) {
     });
 
     fmh.createJsSiteMap(outputDir, siteMap);
+    runHtmlEdit(siteMap, outputDir);
 }
 
 function renderFile(file, siteMap, defaultSettings, resourceDir, outputDir) {

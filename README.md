@@ -45,4 +45,4 @@ arguments:
 
 ## **Experimental**
 
-- Adding the class of either numberedMenu or numbered will change how the page menu is created.
+- Adding the class of either numberedMenu or numbered will change how the page menu (id=docMenuArea) is created.

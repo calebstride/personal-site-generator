@@ -1,5 +1,5 @@
 import * as fmh from './src/file-helper.js';
-import {renderFiles} from './src/file-manager.js';
+import {renderFiles} from './src/file-renderer.js';
 import {ArgumentParser} from 'argparse';
 
 

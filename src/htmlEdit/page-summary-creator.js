@@ -1,5 +1,5 @@
-// Create the nav menu for the given page. The page is given as the cheerio page object
-export function createNavMenuForPage($) {
+// Create the page menu for the given page. The page is given as the cheerio page object
+export function createPageMenuForPage($) {
     const appendArea = $('#docMenuArea');
     if (appendArea === null || appendArea === undefined) {
         console.log('Could not find the area to append the page menu');
