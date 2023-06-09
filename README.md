@@ -4,7 +4,10 @@ This repo was made for the purpose of creating pages for a personal website. The
 markdown files that would be rendered and placed into html files. These html files could then be placed on any server as
 static html content.
 
-Most of the work done in this repo was around creating and rendering the pages rather than the website content.
+Most of the work done in this repo was around creating and rendering the pages. The files that you want to transformed
+from md files to html static content will all need to be created from scratch with their css / javascript. You can see
+an
+example of this [here](https://github.com/CalebStride/CalebStride.github.io).
 Unfortunately I didn't really search for static website generators before starting on this project. If I did, I would
 have found that technologies already exist that take markdown files and create nice looking websites from them (
 like [Jekyll](https://jekyllrb.com/)).
@@ -42,6 +45,8 @@ arguments:
 
 - You can **order the pages** that appear on the sidebar by starting the filename with 'xx_'. Where xx is a number.
 - By putting a `<div id="docMenuArea"/>` tag within the markdown a nav menu for that page will be created.
+- Similarly, you can put a `<nav id="sideBar"/>` tag within the template to create a nav
+  bar
 
 ## **Experimental**
 

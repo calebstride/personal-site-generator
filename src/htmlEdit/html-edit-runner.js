@@ -20,7 +20,7 @@ export function runHtmlEdit(siteMap, fileDir) {
         // Apply the html editing that needs doing for each file
         const $ = cheerio.load(fileContent);
         createPageMenuForPage($);
-        createNavBarOnPage(siteMap, $);
+        createNavBarOnPage($, siteMap, fileLocation);
 
         console.log('Updating ' + fileLocation + ' with the new html content');
         fs.writeFileSync(fileLocation, $.html());
