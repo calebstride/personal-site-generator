@@ -1,6 +1,8 @@
-import * as marked from 'marked';
+import {Marked} from 'marked';
 import {load} from 'js-yaml';
 import * as fmh from './file-helper.js';
+import {markedHighlight} from 'marked-highlight';
+import hljs from 'highlight.js';
 
 // Loads in the template file and replaces the values with details in the markdown file
 export function replaceMarkdownVariables(content, defaultPageConfig, resourceDir) {
@@ -19,10 +21,17 @@ export function replaceMarkdownVariables(content, defaultPageConfig, resourceDir
     const pageInTemplate = replaceVariables(fmh.readFile(layoutLocation).toString(), finalPageConfig);
 
     return {
-        'content': pageInTemplate,
-        'name': finalPageConfig.title
+        'content': pageInTemplate, 'name': finalPageConfig.title
     };
 }
+
+// Create a marked object that will format the code using highlight.js
+const marked = new Marked(markedHighlight({
+    langPrefix: 'hljs language-', highlight(code, lang) {
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        return hljs.highlight(code, {language}).value;
+    }
+}));
 
 // Merges the default conf to the page conf. Assumes all settings are defined in default conf file
 function mergeConfObjects(defaultConf, pageConf) {
