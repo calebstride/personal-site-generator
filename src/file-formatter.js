@@ -2,7 +2,7 @@ import * as marked from 'marked';
 import {load} from 'js-yaml';
 import * as fmh from './file-helper.js';
 
-
+// Loads in the template file and replaces the values with details in the markdown file
 export function replaceMarkdownVariables(content, defaultPageConfig, resourceDir) {
     // Read in the yaml settings in each md file
     let finalPageConfig;

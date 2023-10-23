@@ -1,7 +1,3 @@
-// IN PROGRESS. This might be pointless though as if I want to recreate the expanded menus between pages I'd need to go
-// through the whole menu again and expand the selected ones. Which probably isn't that much more effort than just
-// creating them as they go along.
-
 // Create the nav menu on the page. Needs to be done after a map of the site is created
 export function createNavBarOnPage($, siteMap, fileLocation) {
     let $navBar = $('#sideBar');

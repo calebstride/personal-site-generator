@@ -1,5 +1,5 @@
 {
-  "name": "personal-site",
+  "name": "personal-site-generator",
   "version": "0.1.1",
   "description": "Compiles the site ready for deployment",
   "main": "renderResources.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CalebStride/personal-site.git"
+    "url": "git+https://github.com/CalebStride/personal-site-generator.git"
   },
   "author": "Caleb Stride",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CalebStride/personal-site/issues"
+    "url": "https://github.com/CalebStride/personal-site-generator/issues"
   },
-  "homepage": "https://github.com/CalebStride/personal-site#readme",
+  "homepage": "https://github.com/CalebStride/personal-site-generator#readme",
   "dependencies": {
     "argparse": "^2.0.1",
     "js-yaml": "~4",

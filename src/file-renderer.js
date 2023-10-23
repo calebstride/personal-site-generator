@@ -5,6 +5,7 @@ import {addFileToSiteMap} from './site-map-creator.js';
 import * as rfm from './file-formatter.js';
 import {runHtmlEdit} from './htmlEdit/html-edit-runner.js';
 
+// Render the files, converting them from markdown to html
 export function renderFiles(path, outputDir, resourceDir) {
     let files = fmh.getFilesToPrepare(resourceDir + '\\siteContent');
     console.log('Moving and formatting the following files and folders:');
@@ -22,6 +23,7 @@ export function renderFiles(path, outputDir, resourceDir) {
     runHtmlEdit(siteMap, outputDir);
 }
 
+// Copy the files to the new location. Changing markdown to html and creating a sitemap as moves files
 function renderFile(file, siteMap, defaultSettings, resourceDir, outputDir) {
     const contentDir = resourceDir + '\\siteContent';
     try {
