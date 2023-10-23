@@ -33,7 +33,6 @@ export function createPageMenuForPage($) {
 
 // Create a link for the header
 function createLinkForHeader($parentHtml, $header, numbers, useNumbering) {
-    console.log('Id prop ' + $header.prop('id'));
     if ($header.prop('id') === undefined) {
         $header.prop('id', $header.text().replaceAll(' ', ''));
     }
