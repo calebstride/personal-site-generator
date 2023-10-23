@@ -1,4 +1,4 @@
-# **Personal Website**
+# **Personal Website Generator**
 
 This repo was made for the purpose of creating pages for a personal website. The idea was to allow myself to create
 markdown files that would be rendered and placed into html files. These html files could then be placed on any server as
