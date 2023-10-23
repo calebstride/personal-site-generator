@@ -28,8 +28,6 @@ function createNavBarFromMap($, siteMap, fileLocation) {
 
 // Creates the nav bar buttons and adds them to the parent
 function createNavBarButtons($, siteMapFragment, $elementParent, fileLocation) {
-    let isExpand = false;
-
     for (let i = 0; i < siteMapFragment.length; i++) {
         const pageObject = siteMapFragment[i];
         let $menuButton = $('<li></li>');
@@ -38,47 +36,42 @@ function createNavBarButtons($, siteMapFragment, $elementParent, fileLocation) {
             $buttonContent.append($('<div class="dropDownIcon"></div>'));
             $buttonContent.append(createLinkText($, pageObject.name, pageObject.page));
             $menuButton.append($buttonContent);
-            isExpand = setElementSelectedNav($menuButton, pageObject, fileLocation);
+            setElementSelectedNav($menuButton, pageObject, fileLocation);
         } else {
-            isExpand = createParentNavButton($, $menuButton, pageObject, fileLocation);
+            createParentNavButton($, $menuButton, pageObject, fileLocation);
         }
         $elementParent.append($menuButton);
     }
-    return isExpand;
 }
 
 // Deals with the nav bar button that will contain child links
 function createParentNavButton($, $menuButton, pageObject, fileLocation) {
-    let $buttonDropdown = $(`<div class="dropDownButton" id="${pageObject.name + 'DropDownB'}" onclick="ContentTools.hideOrShowNavBar(this, '${pageObject.name + 'DropDown'}')"></div>`);
+    let $buttonDropdown = $(
+        `<div class="dropDownButton" id="${pageObject.name + 'DropDownB'}" onclick="ContentTools.hideOrShowNavBar(this, '${pageObject.name + 'DropDown'}')"></div>`);
     $buttonDropdown.append($('<div class="dropDownIcon" ></div>'));
     $buttonDropdown.append(createLinkText($, pageObject.name, pageObject.page));
     $menuButton.append($buttonDropdown);
-    let isExpand = setElementSelectedNav($buttonDropdown, pageObject, fileLocation);
 
     let $dropDownContent = $(`<ul class="dropDownContent" id="${pageObject.name + 'DropDown'}"></ul>`);
     createNavBarButtons($, pageObject.children, $dropDownContent, fileLocation);
-    if (!isExpand) {
-        $dropDownContent.addClass('hiddenFeature');
-    } else {
-        $dropDownContent.addClass('selectedDD');
-    }
+    $dropDownContent.addClass('selectedDD');
+    setElementSelectedNav($menuButton, pageObject, fileLocation);
     $menuButton.append($dropDownContent);
-    return isExpand;
 }
 
 // Sets the nav bar button as selected
 function setElementSelectedNav($element, pageObject, fileLocation) {
+    console.log('Page ' + pageObject.page + ' and file location ' + fileLocation);
     if (fileLocation.includes(pageObject.page)) {
         $element.addClass('selected');
-        return true;
     }
-    return false;
 }
 
 // Creates a link with the given text
 function createLinkText($, linkText, link) {
     // If the link is clicked don't call any parent events unless menu is opened
-    let $linkTag = $(`<a onclick="if(window.sessionStorage.getItem('${linkText}') == 'true'){event.stopPropagation();}">${linkText}</a>`);
+    let $linkTag = $(
+        `<a onclick="if(window.sessionStorage.getItem('${linkText}') === 'true'){event.stopPropagation();}">${linkText}</a>`);
     if (link.length !== 0) {
         $linkTag.attr('href', link);
     }

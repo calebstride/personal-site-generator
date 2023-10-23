@@ -46,9 +46,12 @@ class ContentTools {
 
     // Sets the nav bar button as selected
     static setElementSelectedNav(element, pageName) {
-        if (window.sessionStorage.getItem(pageName) == 'true') {
+        if (window.sessionStorage.getItem(pageName) === 'true') {
             element.classList.add('selectedDD');
             element.nextElementSibling.classList.remove('hiddenFeature');
+        } else {
+            element.classList.remove('selectedDD');
+            element.nextElementSibling.classList.add('hiddenFeature');
         }
     }
 }
