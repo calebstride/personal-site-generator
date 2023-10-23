@@ -61,7 +61,6 @@ function createParentNavButton($, $menuButton, pageObject, fileLocation) {
 
 // Sets the nav bar button as selected
 function setElementSelectedNav($element, pageObject, fileLocation) {
-    console.log('Page ' + pageObject.page + ' and file location ' + fileLocation);
     if (fileLocation.includes(pageObject.page)) {
         $element.addClass('selected');
     }
