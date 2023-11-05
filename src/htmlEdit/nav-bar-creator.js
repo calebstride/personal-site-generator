@@ -32,7 +32,7 @@ function createNavBarButtons($, siteMapFragment, $elementParent, fileLocation) {
         const pageObject = siteMapFragment[i];
         let $menuButton = $('<li></li>');
         if (pageObject.children === undefined) {
-            let $buttonContent = $('<div></div>');
+            let $buttonContent = $('<div class="menu-button"></div>');
             $buttonContent.append($('<div class="drop-down-icon"></div>'));
             $buttonContent.append(createLinkText($, pageObject.name, pageObject.page));
             $menuButton.append($buttonContent);
@@ -47,7 +47,7 @@ function createNavBarButtons($, siteMapFragment, $elementParent, fileLocation) {
 // Deals with the nav bar button that will contain child links
 function createParentNavButton($, $menuButton, pageObject, fileLocation) {
     let $buttonDropdown = $(
-        `<div class="drop-down-button" id="${pageObject.name + 'drop-down-b'}" onclick="ContentTools.hideOrShowNavBar(this, '${pageObject.name + '-drop-down'}')"></div>`);
+        `<div class="drop-down-button menu-button" id="${pageObject.name + 'drop-down-b'}" onclick="ContentTools.hideOrShowNavBar(this, '${pageObject.name + '-drop-down'}')"></div>`);
     $buttonDropdown.append($('<div class="drop-down-icon" ></div>'));
     $buttonDropdown.append(createLinkText($, pageObject.name, pageObject.page));
     $menuButton.append($buttonDropdown);
