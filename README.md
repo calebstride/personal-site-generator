@@ -43,11 +43,11 @@ arguments:
 
 ## **Notes**
 
-- You can **order the pages** that appear on the sidebar by starting the filename with 'xx_'. Where xx is a number.
-- By putting a `<div id="docMenuArea"/>` tag within the markdown a nav menu for that page will be created.
-- Similarly, you can put a `<nav id="sideBar"/>` tag within the template to create a nav
+- You can **order the pages** that appear on the side-ba by starting the filename with 'xx_'. Where xx is a number.
+- By putting a `<div id="doc-menu-area"/>` tag within the markdown a nav menu for that page will be created.
+- Similarly, you can put a `<nav id="side-ba"/>` tag within the template to create a nav
   bar
 
 ## **Experimental**
 
-- Adding the class of either numberedMenu or numbered will change how the page menu (id=docMenuArea) is created.
+- Adding the class of either numbered-menu or numbered will change how the page menu (id=doc-menu-area) is created.

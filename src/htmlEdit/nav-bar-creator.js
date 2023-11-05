@@ -1,11 +1,11 @@
 // Create the nav menu on the page. Needs to be done after a map of the site is created
 export function createNavBarOnPage($, siteMap, fileLocation) {
-    let $navBar = $('#sideBar');
+    let $navBar = $('#side-bar');
     if ($navBar === null || $navBar === undefined) {
         console.log('Could not find the area to append the nav menu');
         return;
     }
-    $navBar.addClass('hiddenFeatureMob');
+    $navBar.addClass('hidden-feature-mob');
     $navBar.append(createCloseButton());
     $navBar.append(createNavBarFromMap($, siteMap, fileLocation));
 
@@ -21,7 +21,7 @@ export function createNavBarOnPage($, siteMap, fileLocation) {
 
 // Create the nav bar from the given site map
 function createNavBarFromMap($, siteMap, fileLocation) {
-    let $menuHolder = $('<ul id="mainNavBar"></ul>');
+    let $menuHolder = $('<ul id="main-nav-bar"></ul>');
     createNavBarButtons($, siteMap, $menuHolder, fileLocation);
     return $menuHolder;
 }
@@ -33,7 +33,7 @@ function createNavBarButtons($, siteMapFragment, $elementParent, fileLocation) {
         let $menuButton = $('<li></li>');
         if (pageObject.children === undefined) {
             let $buttonContent = $('<div></div>');
-            $buttonContent.append($('<div class="dropDownIcon"></div>'));
+            $buttonContent.append($('<div class="drop-down-icon"></div>'));
             $buttonContent.append(createLinkText($, pageObject.name, pageObject.page));
             $menuButton.append($buttonContent);
             setElementSelectedNav($menuButton, pageObject, fileLocation);
@@ -47,14 +47,14 @@ function createNavBarButtons($, siteMapFragment, $elementParent, fileLocation) {
 // Deals with the nav bar button that will contain child links
 function createParentNavButton($, $menuButton, pageObject, fileLocation) {
     let $buttonDropdown = $(
-        `<div class="dropDownButton" id="${pageObject.name + 'DropDownB'}" onclick="ContentTools.hideOrShowNavBar(this, '${pageObject.name + 'DropDown'}')"></div>`);
-    $buttonDropdown.append($('<div class="dropDownIcon" ></div>'));
+        `<div class="drop-down-button" id="${pageObject.name + 'drop-down-b'}" onclick="ContentTools.hideOrShowNavBar(this, '${pageObject.name + '-drop-down'}')"></div>`);
+    $buttonDropdown.append($('<div class="drop-down-icon" ></div>'));
     $buttonDropdown.append(createLinkText($, pageObject.name, pageObject.page));
     $menuButton.append($buttonDropdown);
 
-    let $dropDownContent = $(`<ul class="dropDownContent" id="${pageObject.name + 'DropDown'}"></ul>`);
+    let $dropDownContent = $(`<ul class="drop-down-content" id="${pageObject.name + '-drop-down'}"></ul>`);
     createNavBarButtons($, pageObject.children, $dropDownContent, fileLocation);
-    $dropDownContent.addClass('selectedDD');
+    $dropDownContent.addClass('selected-drop-down');
     setElementSelectedNav($menuButton, pageObject, fileLocation);
     $menuButton.append($dropDownContent);
 }
@@ -78,5 +78,5 @@ function createLinkText($, linkText, link) {
 }
 
 function createCloseButton() {
-    return '<div id="closeContainer" class="hiddenFeatureBig" onclick="ContentTools.hideOrShow(\'sideBar\', true);">&times;</div>';
+    return '<div id="close-container" class="hidden-feature-big" onclick="ContentTools.hideOrShow(\'side-bar\', true);">&times;</div>';
 }

@@ -1,19 +1,19 @@
 // Create the page menu for the given page. The page is given as the cheerio page object
 export function createPageMenuForPage($) {
-    const appendArea = $('#docMenuArea');
+    const appendArea = $('#doc-menu-area');
     if (appendArea === null || appendArea === undefined) {
         console.log('Could not find the area to append the page menu');
         return;
     }
     const areaClass = appendArea.prop('class');
-    let useNumberingMenu = areaClass === undefined ? false : areaClass.includes('numberedMenu'); // Add numbering for menu only
+    let useNumberingMenu = areaClass === undefined ? false : areaClass.includes('numbered-menu'); // Add numbering for menu only
     let useNumbering = areaClass === undefined || !useNumberingMenu ? false : areaClass.includes('numbered'); // Add numbering for headers and menu
 
     const pageHeaderTypes = ['H2', 'H3', 'H4', 'H5'];
     const $pageHeaders = $('h2, h3, h4, h5');
     let numbering = [0, 0, 0, 0];
     $(appendArea).append('<div></div>');
-    const $menu = $('#docMenuArea div');
+    const $menu = $('#doc-menu-area div');
     let lastIndexUpdated = 0;
     let indexToUpdate = 0;
 
@@ -36,7 +36,7 @@ function createLinkForHeader($parentHtml, $header, numbers, useNumbering) {
     if ($header.prop('id') === undefined) {
         $header.prop('id', $header.text().replaceAll(' ', ''));
     }
-    $parentHtml.append(`<a href="#${$header.prop('id')}" class="headerRow${$header.prop('tagName')} docMenuLink"> 
+    $parentHtml.append(`<a href="#${$header.prop('id')}" class="header-row-${$header.prop('tagName').toLowerCase()} doc-menu-link"> 
             ${createNumberedHeader($header.text(), numbers, useNumbering)} </a>`);
 }
 
