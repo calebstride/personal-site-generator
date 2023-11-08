@@ -6,7 +6,6 @@ export function createNavBarOnPage($, siteMap, fileLocation) {
         return;
     }
     $navBar.addClass('hidden-feature-mob');
-    $navBar.append(createCloseButton());
     $navBar.append(createNavBarFromMap($, siteMap, fileLocation));
 
     $('head').append(`
@@ -75,8 +74,4 @@ function createLinkText($, linkText, link) {
         $linkTag.attr('href', link);
     }
     return $linkTag;
-}
-
-function createCloseButton() {
-    return '<div id="close-container" class="hidden-feature-big" onclick="ContentTools.hideOrShow(\'side-bar\', true);">&times;</div>';
 }
