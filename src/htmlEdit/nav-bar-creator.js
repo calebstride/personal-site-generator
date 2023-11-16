@@ -6,9 +6,9 @@ export function createNavBarOnPage($, siteMap, fileLocation) {
         return;
     }
     $navBar.addClass('hidden-feature-mob');
-    $navBar.append(createNavBarFromMap($, siteMap, fileLocation));
+    $navBar.prepend(createNavBarFromMap($, siteMap, fileLocation));
 
-    $('head').append(`
+    $('head').prepend(`
     <script type="text/javascript" src="/scripts/ContentTools.js"></script>
     <script type="text/javascript">
         window.addEventListener('load', () => { ContentTools.findAndSetSelectedFromStorage(); });
