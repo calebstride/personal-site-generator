@@ -11,9 +11,7 @@ export function createNavBarOnPage($, siteMap, fileLocation) {
     $('head').append(`
     <script type="text/javascript" src="/scripts/ContentTools.js"></script>
     <script type="text/javascript">
-        window.onload = function() {
-            ContentTools.findAndSetSelectedFromStorage();
-        };
+        window.addEventListener('load', () => { ContentTools.findAndSetSelectedFromStorage(); });
     </script>
     `);
 }

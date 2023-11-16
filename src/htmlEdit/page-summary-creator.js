@@ -27,7 +27,7 @@ export function createPageMenuForPage($) {
 
         let numbersWithoutZero = removeZerosFromNumbers(numbering);
         createLinkForHeader($menu, $($pageHeaders[i]), numbersWithoutZero, (useNumberingMenu || useNumbering));
-        $($pageHeaders[i]).text(createNumberedHeader($($pageHeaders[i]).text(), numbersWithoutZero, useNumbering));
+        $($pageHeaders[i]).html(createNumberedHeader($($pageHeaders[i]).text(), numbersWithoutZero, useNumbering));
     }
 }
 
@@ -42,7 +42,7 @@ function createLinkForHeader($parentHtml, $header, numbers, useNumbering) {
 
 // Create a title from the text header and numbered header
 function createNumberedHeader(pageHeader, numbersWithoutZero, useNumbering) {
-    return useNumbering ? numbersWithoutZero.join('.') + '.' + '\xa0\xa0\xa0' + pageHeader : pageHeader;
+    return useNumbering ? '<div class="header-num">' + numbersWithoutZero.join('.') + '.</div>' + '\xa0\xa0' + pageHeader : pageHeader;
 }
 
 // Remove zero values from the array
