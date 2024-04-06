@@ -41,7 +41,6 @@ function mergeConfObjects(defaultConf, pageConf) {
             pageConf[element] = defaultConf[element];
         }
     });
-    console.log(pageConf);
     return pageConf;
 }
 

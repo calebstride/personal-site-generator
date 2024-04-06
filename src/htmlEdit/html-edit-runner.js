@@ -10,7 +10,6 @@ export function runHtmlEdit(siteMap, fileDir) {
     console.log('Updating the html on all rendered pages');
     let pageList = [];
     findPageRecursive(siteMap, pageList);
-    console.log(pageList);
 
     pageList.forEach(page => {
         const fileLocation = fileDir + page.page;
