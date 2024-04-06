@@ -33,18 +33,16 @@ const marked = new Marked(markedHighlight({
     }
 }));
 
-// Merges the default conf to the page conf. Assumes all settings are defined in default conf file
+// Merges the default conf to the page conf
 function mergeConfObjects(defaultConf, pageConf) {
     let defaultKeys = Object.keys(defaultConf);
-    let finalConf = {};
     defaultKeys.forEach((element) => {
         if (pageConf[element] === undefined) {
-            finalConf[element] = defaultConf[element];
-        } else {
-            finalConf[element] = pageConf[element];
+            pageConf[element] = defaultConf[element];
         }
     });
-    return finalConf;
+    console.log(pageConf);
+    return pageConf;
 }
 
 // Replaces the placeholder values with the values found in the config object
