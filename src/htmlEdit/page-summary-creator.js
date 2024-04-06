@@ -20,7 +20,13 @@ export function createPageMenuForPage($) {
     for (let i = 0; i < $pageHeaders.length; i++) {
         indexToUpdate = pageHeaderTypes.indexOf($($pageHeaders[i]).prop('tagName'));
         if (indexToUpdate < lastIndexUpdated) {
-            numbering[lastIndexUpdated] = 0;
+            // If the index is below the last updated index (the header is of higher order) then reset all counters
+            // after the current index
+            numbering.forEach((value, index) => {
+                if (index > indexToUpdate) {
+                    numbering[index] = 0;
+                }
+            });
         }
         numbering[indexToUpdate]++;
         lastIndexUpdated = indexToUpdate;
