@@ -4,6 +4,7 @@ import * as cheerio from 'cheerio';
 import * as fmh from '../file-helper.js';
 import fs from 'fs';
 import {createNavBarOnPage} from './nav-bar-creator.js';
+import {createBlogPageList} from './blog-summary-creator.js';
 
 // From the site map get the html pages and update their html content for editing
 export function runHtmlEdit(siteMap, fileDir) {
@@ -20,6 +21,7 @@ export function runHtmlEdit(siteMap, fileDir) {
         const $ = cheerio.load(fileContent);
         createPageMenuForPage($);
         createNavBarOnPage($, siteMap, fileLocation);
+        createBlogPageList($, siteMap);
 
         console.log('Updating ' + fileLocation + ' with the new html content');
         fs.writeFileSync(fileLocation, $.html());

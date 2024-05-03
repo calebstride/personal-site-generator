@@ -18,11 +18,8 @@ export function replaceMarkdownVariables(content, defaultPageConfig, resourceDir
         finalPageConfig.content = marked.parse(content.substring(content.lastIndexOf('---') + 3));
     }
     const layoutLocation = resourceDir + '\\templates\\' + finalPageConfig.layout;
-    const pageInTemplate = replaceVariables(fmh.readFile(layoutLocation).toString(), finalPageConfig);
-
-    return {
-        'content': pageInTemplate, 'name': finalPageConfig.title
-    };
+    finalPageConfig.content = replaceVariables(fmh.readFile(layoutLocation).toString(), finalPageConfig);
+    return finalPageConfig;
 }
 
 // Create a marked object that will format the code using highlight.js

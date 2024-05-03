@@ -1,5 +1,5 @@
 // Adds the given file to the site map to be added directly to a javascript file
-export function addFileToSiteMap(siteMap, directory, name, outputDir) {
+export function addFileToSiteMap(siteMap, directory, pageConfigValues, outputDir) {
     let resourceDir = directory.split(outputDir + '\\').pop();
     let siteMapSegment = siteMap;
     let pageInfo;
@@ -10,22 +10,34 @@ export function addFileToSiteMap(siteMap, directory, name, outputDir) {
             let parentName = parentsAndFile[parI].charAt(0).toUpperCase() + parentsAndFile[parI].slice(1);
             siteMapSegment = findMapSegment(siteMapSegment, splitCamelCaseName(parentName));
         }
-        pageInfo = {page: '/' + parentsAndFile.join('/'), name: name};
+        const fileName = '/' + parentsAndFile.join('/');
+        pageInfo = createMapSegmentFromConfig(pageConfigValues, fileName);
     } else {
-        let fileName = '/' + resourceDir;
-        pageInfo = {page: fileName, name: name};
+        const fileName = '/' + resourceDir;
+        pageInfo = createMapSegmentFromConfig(pageConfigValues, fileName);
     }
     addPageInfoToSegmentMerge(siteMapSegment, pageInfo);
+}
+
+// Create the info to be stored in the site map from the configuration values
+function createMapSegmentFromConfig(pageConfigValue, fileName) {
+    return {
+        page: fileName,
+        title: pageConfigValue.title,
+        type: pageConfigValue.type,
+        description: pageConfigValue.description,
+        creationDate: pageConfigValue.creationDate
+    };
 }
 
 // Find the segment of the site map from the given parent name
 function findMapSegment(siteMapSegment, parentName) {
     for (let mapI = 0; mapI < siteMapSegment.length; mapI++) {
-        if (siteMapSegment[mapI].page === '' && siteMapSegment[mapI].name === parentName) {
+        if (siteMapSegment[mapI].page === '' && siteMapSegment[mapI].title === parentName) {
             return siteMapSegment[mapI].children;
         }
     }
-    let pageInfo = {page: '', name: parentName, children: []};
+    let pageInfo = {page: '', title: parentName, children: []};
     siteMapSegment.push(pageInfo);
     return pageInfo.children;
 }
@@ -35,7 +47,7 @@ function findMapSegment(siteMapSegment, parentName) {
 function addPageInfoToSegmentMerge(siteMapSegment, pageInfo) {
     let merged = false;
     for (let i = 0; i < siteMapSegment.length; i++) {
-        if (siteMapSegment[i].name === pageInfo.name) {
+        if (siteMapSegment[i].title === pageInfo.title) {
             siteMapSegment[i].page = siteMapSegment[i].page === '' ? pageInfo.page : siteMapSegment[i].page;
             if (siteMapSegment[i].children.length === 0) {
                 siteMapSegment[i].children = pageInfo.children;

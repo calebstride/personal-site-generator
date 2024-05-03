@@ -21,7 +21,7 @@ parser.add_argument('-r', '--resources', {
 let parsedArgs = parser.parse_args();
 
 let outputDir = parsedArgs.output === undefined ? path + '\\public' : parsedArgs.output;
-let resourceDir = parsedArgs.content === undefined ? path + '\\resources' : parsedArgs.output;
+let resourceDir = parsedArgs.resources === undefined ? path + '\\resources' : parsedArgs.resources;
 
 // Now runs the generation of the website from resources
 fmh.removeOutputDirectory(outputDir);

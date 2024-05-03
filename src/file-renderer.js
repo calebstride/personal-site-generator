@@ -29,12 +29,12 @@ function renderFile(file, siteMap, defaultSettings, resourceDir, outputDir) {
     try {
         if (file.includes('.md')) {
             let content = fmh.readFile(file).toString();
-            let formattedObject = rfm.replaceMarkdownVariables(content, defaultSettings.pageContent, resourceDir);
+            let pageConfigValues = rfm.replaceMarkdownVariables(content, defaultSettings.pageContent, resourceDir);
             file = changeFileNameToOutput(file, contentDir, outputDir).replace('.md', '.html');
             // Add the file to the site map object
-            addFileToSiteMap(siteMap, file, formattedObject.name, outputDir);
+            addFileToSiteMap(siteMap, file, pageConfigValues, outputDir);
 
-            fs.writeFileSync(file, formattedObject.content);
+            fs.writeFileSync(file, pageConfigValues.content);
 
         } else {
             if (fs.lstatSync(file).isDirectory()) {

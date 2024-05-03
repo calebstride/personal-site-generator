@@ -1,6 +1,7 @@
 pageContent: # This stores some default value to be overridden in templates
   title: Page Title # The page title to appear in tabs and nav bar
   header: Page Header # The h1 title of the page
-  content: ~ # The main content of the page
   layout: template.html # The default template to use
-  description: '' # The description to go in the meta description tag
+  description: '' # The description to go in the meta description tag, also used on blog summaries
+  type: page # The page type, putting blog will make the page get picked up by the blog menu creation
+  creationDate: ~ # The date string in YYYY-mm-dd, to be added to the blog info as an option
