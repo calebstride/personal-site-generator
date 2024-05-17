@@ -7,7 +7,7 @@ then be placed on any server as
 static html content.
 
 Most of the work done in this repo was around creating and rendering the pages. The files
-that you want to transformed
+that you want to transform
 from md files to html static content will all need to be created from scratch with their
 css / javascript. You can see
 an
@@ -65,8 +65,4 @@ arguments:
   bar. Although it also needs the ContentTools.js file to work.
 - You can use an element with id "blog-summary" in a markdown file to create a list of all
   the pages with type: blog in their front matter
-
-## **Experimental**
-
-- Adding the class of either numbered-menu or numbered will change how the page menu (
-  id=doc-menu-area) is created.
+- Check the conf.yml for some examples on config you can change

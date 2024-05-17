@@ -3,7 +3,7 @@ import * as fmh from './file-helper.js';
 import * as fs from 'fs';
 import {addFileToSiteMap} from './site-map-creator.js';
 import * as rfm from './file-formatter.js';
-import {runHtmlEdit} from './htmlEdit/html-edit-runner.js';
+import {runHtmlEdit, runSinglePageHtmlEdit} from './htmlEdit/html-edit-runner.js';
 
 // Render the files, converting them from markdown to html
 export function renderFiles(path, outputDir, resourceDir) {
@@ -33,9 +33,8 @@ function renderFile(file, siteMap, defaultSettings, resourceDir, outputDir) {
             file = changeFileNameToOutput(file, contentDir, outputDir).replace('.md', '.html');
             // Add the file to the site map object
             addFileToSiteMap(siteMap, file, pageConfigValues, outputDir);
-
+            runSinglePageHtmlEdit(pageConfigValues);
             fs.writeFileSync(file, pageConfigValues.content);
-
         } else {
             if (fs.lstatSync(file).isDirectory()) {
                 fs.mkdirSync(changeFileNameToOutput(file, contentDir, outputDir));

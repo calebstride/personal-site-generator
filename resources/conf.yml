@@ -5,3 +5,4 @@ pageContent: # This stores some default value to be overridden in templates
   description: '' # The description to go in the meta description tag, also used on blog summaries
   type: page # The page type, putting blog will make the page get picked up by the blog menu creation
   creationDate: ~ # The date string in YYYY-mm-dd, to be added to the blog info as an option
+  numbered: false # If the headers should be numbered

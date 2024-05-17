@@ -19,13 +19,20 @@ export function runHtmlEdit(siteMap, fileDir) {
 
         // Apply the html editing that needs doing for each file
         const $ = cheerio.load(fileContent);
-        createPageMenuForPage($);
         createNavBarOnPage($, siteMap, fileLocation);
         createBlogPageList($, siteMap);
 
         console.log('Updating ' + fileLocation + ' with the new html content');
         fs.writeFileSync(fileLocation, $.html());
     });
+}
+
+// Edit a single html page. Use this when we don't care about other pages.
+export function runSinglePageHtmlEdit(pageConfigValues) {
+    const $ = cheerio.load(pageConfigValues.content);
+    createPageMenuForPage($, pageConfigValues.numbered);
+    pageConfigValues.content = $.html();
+    return pageConfigValues;
 }
 
 function findPageRecursive(siteMap, pageList) {

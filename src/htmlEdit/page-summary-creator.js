@@ -1,22 +1,18 @@
 // Create the page menu for the given page. The page is given as the cheerio page object
-export function createPageMenuForPage($) {
+export function createPageMenuForPage($, numberHeaders) {
     const appendArea = $('#doc-menu-area');
-    if (appendArea === null || appendArea === undefined) {
-        console.log('Could not find the area to append the page menu');
-        return;
+    let createMenu = appendArea !== null && appendArea !== undefined;
+    if (createMenu) {
+        $(appendArea).append('<div></div>');
     }
-    const areaClass = appendArea.prop('class');
-    let useNumberingMenu = areaClass === undefined ? false : areaClass.includes('numbered-menu'); // Add numbering for menu only
-    let useNumbering = areaClass === undefined || !useNumberingMenu ? false : areaClass.includes('numbered'); // Add numbering for headers and menu
 
     const pageHeaderTypes = ['H2', 'H3', 'H4', 'H5'];
     const $pageHeaders = $('h2, h3, h4, h5');
     let numbering = [0, 0, 0, 0];
-    $(appendArea).append('<div></div>');
-    const $menu = $('#doc-menu-area div');
     let lastIndexUpdated = 0;
     let indexToUpdate = 0;
 
+    const $menu = $('#doc-menu-area div');
     for (let i = 0; i < $pageHeaders.length; i++) {
         indexToUpdate = pageHeaderTypes.indexOf($($pageHeaders[i]).prop('tagName'));
         if (indexToUpdate < lastIndexUpdated) {
@@ -32,18 +28,21 @@ export function createPageMenuForPage($) {
         lastIndexUpdated = indexToUpdate;
 
         let numbersWithoutZero = removeZerosFromNumbers(numbering);
-        createLinkForHeader($menu, $($pageHeaders[i]), numbersWithoutZero, (useNumberingMenu || useNumbering));
-        $($pageHeaders[i]).html(createNumberedHeader($($pageHeaders[i]).text(), numbersWithoutZero, useNumbering));
+        let headerName = createNumberedHeader($($pageHeaders[i]).text(), numbersWithoutZero, numberHeaders);
+        if (createMenu) {
+            createLinkForHeader($menu, $($pageHeaders[i]), numbersWithoutZero, headerName);
+        }
+        $($pageHeaders[i]).html(headerName);
     }
 }
 
 // Create a link for the header
-function createLinkForHeader($parentHtml, $header, numbers, useNumbering) {
+function createLinkForHeader($parentHtml, $header, numbers, headerName) {
     if ($header.prop('id') === undefined) {
         $header.prop('id', $header.text().replaceAll(' ', ''));
     }
     $parentHtml.append(`<a href="#${$header.prop('id')}" class="header-row-${$header.prop('tagName').toLowerCase()} doc-menu-link"> 
-            ${createNumberedHeader($header.text(), numbers, useNumbering)} </a>`);
+            ${headerName} </a>`);
 }
 
 // Create a title from the text header and numbered header
